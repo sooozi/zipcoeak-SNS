@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"No tests specified\"",
         "start": "node index.js",
-        "build": "tsc",
+        "build": "babel src --out-dir lib --extensions \".js,.ts\"",
         "prepare": "husky install"
     },
     "keywords": [],

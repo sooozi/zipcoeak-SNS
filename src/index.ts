@@ -1,5 +1,3 @@
-function greet(name: string): string {
-    return `Hello, ${name}!`;
-}
+import sum from './sum';
 
-console.log(greet('World'));
+console.log('Total:', sum('1', 3));
