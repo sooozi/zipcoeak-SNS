@@ -1,7 +1,9 @@
-const arrowFunction = function () {
+'use strict';
+
+var arrowFunction = function arrowFunction() {
     return 'Hello, Babel!';
 };
-const promiseExample = new Promise(function (resolve, reject) {
+var promiseExample = new Promise(function (resolve, reject) {
     setTimeout(function () {
         return resolve('Promise resolved!');
     }, 1000);
