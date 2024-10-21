@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "module": "commonjs",
+        "target": "es5",
+        "strict": true,
+        "esModuleInterop": true
+    },
+    "include": ["src/**/*"], // src 폴더 내 모든 파일 포함
+    "exclude": ["dist"] // dist 폴더 제외
+}
