@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"No tests specified\"",
         "start": "node index.js",
-        "build": "babel src --out-dir lib --extensions \".js,.ts\"",
+        "type-check": "tsc --noEmit",
+        "build": "npm run type-check && babel src --out-dir dist --extensions \".js,.ts\"",
         "prepare": "husky install"
     },
     "keywords": [],
