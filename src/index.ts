@@ -1,5 +1,5 @@
-'use strict';
-function greet(name) {
+function greet(name: string): string {
     return `Hello, ${name}!`;
 }
+
 console.log(greet('World'));
