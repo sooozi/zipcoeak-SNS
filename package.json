@@ -30,16 +30,22 @@
         "@eslint/js": "^9.13.0",
         "@types/react": "^18.3.11",
         "@types/react-dom": "^18.3.1",
+        "@webpack-cli/generators": "^3.0.7",
         "eslint": "^9.13.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-formatter-codeframe": "^7.32.1",
         "eslint-plugin-prettier": "^5.2.1",
         "eslint-plugin-react": "^7.37.1",
         "globals": "^15.11.0",
+        "html-webpack-plugin": "^5.6.3",
         "husky": "^8.0.0",
         "lint-staged": "^15.2.10",
         "prettier": "^3.3.3",
+        "ts-loader": "^9.5.1",
         "typescript": "^5.6.3",
-        "typescript-eslint": "^8.10.0"
+        "typescript-eslint": "^8.10.0",
+        "webpack": "^5.95.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.1.0"
     }
 }
