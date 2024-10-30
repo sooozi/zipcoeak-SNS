@@ -23,6 +23,7 @@ Mooders : 포스팅하는 이용자 / Moodies : 포스팅 뷰어
 ### Tech Stack
 
 - 프레임워크 : React
+- 타입 시스템: TypeScript
 - 스타일링 : React Bootstrap, CSS-in-CSS
 - 상태관리 : Redux Toolkit
 - 데이터 Fetching 및 API 통신 : Axios
