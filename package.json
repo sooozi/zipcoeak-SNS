@@ -2,10 +2,11 @@
     "name": "zipcoak-sns",
     "version": "1.0.0",
     "description": "📱[SNS App] 다양한 기능을 갖춘 소셜 네트워킹 웹사이트 프로젝트",
+    "type": "module",
     "main": "index.js",
     "scripts": {
         "test": "echo \"No tests specified\"",
-        "start": "node index.js",
+        "start": "webpack serve --mode development",
         "type-check": "tsc --noEmit",
         "build": "npm run type-check && babel src --out-dir dist --extensions \".js,.ts\"",
         "prepare": "husky install"

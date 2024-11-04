@@ -5,7 +5,9 @@
         "target": "es6", // es5에서 es6로 변경
         "noEmit": true,
         "strict": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
     },
     "include": ["src/**/*"], // src 폴더 내 모든 파일 포함
     "exclude": ["dist"] // dist 폴더 제외
