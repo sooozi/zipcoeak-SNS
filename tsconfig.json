@@ -3,7 +3,7 @@
         "outDir": "./dist",
         "module": "commonjs",
         "target": "es6", // es5에서 es6로 변경
-        "noEmit": true,
+        "noEmit": false,
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
