@@ -2,4 +2,5 @@ import ReactDOM from 'react-dom/client'; // createRoot를 사용하기 위한 �
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!); // createRoot를 사용
+// eslint-disable-next-line react/react-in-jsx-scope
 root.render(<App />); // 렌더링
