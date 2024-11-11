@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client'; // createRoot를 사용하기 위한 새로운 import
 import App from './App';
 

@@ -6,7 +6,7 @@ const path = require('path');
 const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
-    entry: './src/index.ts',
+    entry: './src/index.tsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js', // 번들 파일 이름 추가
