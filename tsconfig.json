@@ -7,7 +7,8 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "react" // JSX 문법 사용을 위해 추가
     },
     "include": ["src/**/*"], // src 폴더 내 모든 파일 포함
     "exclude": ["dist"] // dist 폴더 제외
