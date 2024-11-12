@@ -1,6 +1,11 @@
-import ReactDOM from 'react-dom/client'; // createRoot를 사용하기 위한 새로운 import
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root')!); // createRoot를 사용
-// eslint-disable-next-line react/react-in-jsx-scope
-root.render(<App />); // 렌더링
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+root.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
+);

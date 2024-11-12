@@ -1,16 +1,24 @@
 // App.tsx
 import React from 'react';
-import Header from './layout/header';
+import { Route, Routes } from 'react-router';
+import AppLayout from './layout/AppLayout';
+import Home from './page/Home/Home';
+import MoviePage from './page/Movies/Movies';
+import MovieDetailPage from './page/MoviesDetail/MoviesDetail';
+import NotFoundPage from './page/NotFoundPage/NotFoundPage';
 
 const App: React.FC = () => {
     return (
-        <div>
-            <Header
-                title="Welcome to My Website"
-                subtitle="This is a subtitle"
-            />
-            <div>앱 페이지</div>
-        </div>
+        <Routes>
+            <Route path="/" element={<AppLayout />}>
+                <Route index element={<Home />} />
+                <Route path="movies">
+                    <Route index element={<MoviePage />} />
+                    <Route path=":id" element={<MovieDetailPage />} />
+                </Route>
+                <Route path="*" element={<NotFoundPage />} />
+            </Route>
+        </Routes>
     );
 };
 

@@ -19,5 +19,8 @@ export default [
                 version: '18', // React 버전 18 설정
             },
         },
+        rules: {
+            'react/react-in-jsx-scope': 'off', // React import 필요성 해제
+        },
     },
 ];
