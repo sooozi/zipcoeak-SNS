@@ -4,7 +4,7 @@ import Header from './header';
 
 const AppLayout = () => {
     return (
-        <div>
+        <div className="bg-gray-800 text-white">
             <Header></Header>
             <Outlet />
         </div>
