@@ -2,7 +2,7 @@ import { ChevronRight } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useUpComingMoviesQuery } from '../../../../hooks/useUpComingMovie';
+import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovie';
 
 interface Movie {
     id: number;
@@ -13,22 +13,21 @@ interface Movie {
     year: number;
 }
 
-interface UpComingMovieListProps {
+interface PopularMovieListProps {
     title: string;
 }
 
-const UpComingMovieList: React.FC<UpComingMovieListProps> = ({ title }) => {
+const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
     const {
         data: response,
         isLoading,
         isError,
         error,
-    } = useUpComingMoviesQuery();
+    } = usePopularMoviesQuery();
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error: {error.message}</p>;
 
-    // 응답 데이터가 MoviesResponse 타입임을 명시
     const movies = response?.data?.results || [];
 
     return (
@@ -69,4 +68,4 @@ const UpComingMovieList: React.FC<UpComingMovieListProps> = ({ title }) => {
     );
 };
 
-export default UpComingMovieList;
+export default PopularMovieList;
