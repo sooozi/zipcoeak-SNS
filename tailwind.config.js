@@ -1,9 +1,9 @@
-/** @type {import('tailwindcss').Config} */
-export const content = [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-];
-export const theme = {
-    extend: {},
+module.exports = {
+    content: [
+        './src/**/*.{html,js,jsx,ts,tsx}', // Tailwind가 적용될 파일들의 경로를 지정
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
 };
-export const plugins = [];

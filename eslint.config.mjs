@@ -7,7 +7,14 @@ import tseslint from 'typescript-eslint';
 
 export default [
     { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
-    { languageOptions: { globals: globals.browser } },
+    {
+        languageOptions: {
+            globals: {
+                ...globals.browser,
+                ...globals.node, // Node.js 환경의 글로벌 객체 추가
+            },
+        },
+    },
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
     pluginReact.configs.flat.recommended,
