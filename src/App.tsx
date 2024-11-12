@@ -1,6 +1,7 @@
 // App.tsx
 import React from 'react';
 import { Route, Routes } from 'react-router';
+import '../style/global.css';
 import AppLayout from './layout/AppLayout';
 import Home from './page/Home/Home';
 import MoviePage from './page/Movies/Movies';

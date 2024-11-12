@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router';
+import '../../style/global.css';
 import Header from './header';
 
 const AppLayout = () => {
