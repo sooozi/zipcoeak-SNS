@@ -78,6 +78,7 @@ export default function Home() {
 
             try {
                 const response = await axios.get(url);
+                console.log(response.data); // 응답 데이터 확인
                 const moviesData = response.data.results.map((movie: any) => ({
                     id: movie.id,
                     title: movie.title,
