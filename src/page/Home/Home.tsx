@@ -1,7 +1,8 @@
 'use client';
 
+import axios from 'axios';
 import { ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // 영화 객체의 타입 정의
@@ -13,58 +14,6 @@ interface Movie {
     year: number;
     rating: number;
 }
-
-// 더미 데이터 (추가 정보 포함)
-const moviesData: Movie[] = [
-    {
-        id: 1,
-        title: '인셉션',
-        imageUrl: '/placeholder.svg?height=400&width=300',
-        director: '크리스토퍼 놀란',
-        year: 2010,
-        rating: 8.8,
-    },
-    {
-        id: 2,
-        title: '다크 나이트',
-        imageUrl: '/placeholder.svg?height=400&width=300',
-        director: '크리스토퍼 놀란',
-        year: 2008,
-        rating: 9.0,
-    },
-    {
-        id: 3,
-        title: '인터스텔라',
-        imageUrl: '/placeholder.svg?height=400&width=300',
-        director: '크리스토퍼 놀란',
-        year: 2014,
-        rating: 8.6,
-    },
-    {
-        id: 4,
-        title: '매트릭스',
-        imageUrl: '/placeholder.svg?height=400&width=300',
-        director: '워쇼스키 자매',
-        year: 1999,
-        rating: 8.7,
-    },
-    {
-        id: 5,
-        title: '글래디에이터',
-        imageUrl: '/placeholder.svg?height=400&width=300',
-        director: '리들리 스콧',
-        year: 2000,
-        rating: 8.5,
-    },
-    {
-        id: 6,
-        title: '쇼생크 탈출',
-        imageUrl: '/placeholder.svg?height=400&width=300',
-        director: '프랭크 다라본트',
-        year: 1994,
-        rating: 9.3,
-    },
-];
 
 function MovieCard({ movie }: { movie: Movie }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -99,7 +48,7 @@ function MovieCard({ movie }: { movie: Movie }) {
 function MovieList({ title, movies }: { title: string; movies: Movie[] }) {
     return (
         <div className="space-y-4">
-            <Link to="/">
+            <Link to="/movies">
                 <div className="flex items-center justify-between">
                     <h2 className="text-2xl font-semibold tracking-tight">
                         {title}
@@ -119,11 +68,38 @@ function MovieList({ title, movies }: { title: string; movies: Movie[] }) {
 }
 
 export default function Home() {
+    const [movies, setMovies] = useState<Movie[]>([]);
+
+    useEffect(() => {
+        // TMDb API에서 영화 목록 가져오기
+        const fetchMovies = async () => {
+            const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+            const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`;
+
+            try {
+                const response = await axios.get(url);
+                const moviesData = response.data.results.map((movie: any) => ({
+                    id: movie.id,
+                    title: movie.title,
+                    imageUrl: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                    director: movie.director || '정보 없음', // TMDb API에서 감독 정보는 별도로 요청해야 할 수도 있습니다.
+                    year: new Date(movie.release_date).getFullYear(),
+                    rating: movie.vote_average,
+                }));
+                setMovies(moviesData);
+            } catch (error) {
+                console.error('영화 정보를 불러오는 데 실패했습니다:', error);
+            }
+        };
+
+        fetchMovies();
+    }, []);
+
     return (
         <div className="space-y-8 p-8">
-            <MovieList title="최신 영화" movies={moviesData} />
-            <MovieList title="인기 영화" movies={moviesData} />
-            <MovieList title="추천 영화" movies={moviesData} />
+            <MovieList title="최신 영화" movies={movies} />
+            <MovieList title="인기 영화" movies={movies} />
+            <MovieList title="추천 영화" movies={movies} />
         </div>
     );
 }
