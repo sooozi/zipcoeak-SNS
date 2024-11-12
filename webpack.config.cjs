@@ -1,17 +1,15 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, no-undef
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// eslint-disable-next-line @typescript-eslint/no-require-imports, no-undef
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const path = require('path');
 
-// eslint-disable-next-line no-undef
 const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
     entry: './src/index.tsx',
     output: {
-        // eslint-disable-next-line no-undef
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js', // 번들 파일 이름 추가
     },
@@ -47,12 +45,11 @@ const config = {
     },
 };
 
-// eslint-disable-next-line no-undef
-module.exports = () => {
-    if (isProduction) {
-        config.mode = 'production';
-    } else {
-        config.mode = 'development';
-    }
-    return config;
+export default {
+    entry: './src/index.tsx',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js',
+    },
+    // 기타 설정들...
 };
