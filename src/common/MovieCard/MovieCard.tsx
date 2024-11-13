@@ -33,8 +33,8 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
                 }`}
             >
                 <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
-                <p>개봉년도: {movie.year}</p>
-                <p>평점: {movie.rating}/10</p>
+                <p>Release Year: {movie.year}</p>
+                <p>Rating: {movie.rating}/10</p>
             </div>
         </div>
     );
