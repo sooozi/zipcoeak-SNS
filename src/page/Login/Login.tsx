@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -9,8 +9,18 @@ const Login = () => {
         e.preventDefault();
         // 닉네임을 로컬 스토리지에 저장
         localStorage.setItem('nickname', nickname);
-        navigate('/'); // 로그인 후 홈 화면으로 이동
+        setNickname(nickname); // 상태 갱신
+        navigate('/'); // 홈 화면으로 이동
+        window.location.reload(); // 페이지 새로고침
     };
+
+    useEffect(() => {
+        // 로컬 스토리지에서 닉네임을 가져와 상태에 반영
+        const storedNickname = localStorage.getItem('nickname');
+        if (storedNickname) {
+            setNickname(storedNickname);
+        }
+    }, []); // 컴포넌트가 마운트될 때만 실행
 
     return (
         <div className="flex items-center justify-center min-h-screen">
