@@ -1,11 +1,12 @@
 import React from 'react';
-import PopularMovieList from '../Home/components/PopularMovieList/PopularMovieList';
+import PopularMovieList from './components/PopularMovieList/PopularMovieList';
 
 const MovieListPage: React.FC = () => {
     return (
-        <div className="container mx-auto p-4">
-            <h1>안녕</h1>
-            <PopularMovieList title="Popular Movies" />
+        <div className="container mx-auto p-4 mt-16 max-w-[1024px]">
+            <div className="px-8">
+                <PopularMovieList title="Movies List" />
+            </div>
         </div>
     );
 };
