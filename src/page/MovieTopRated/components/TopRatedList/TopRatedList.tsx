@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovie';
+import { useTopRatedMoviesQuery } from '../../../../hooks/useTopRatedMovie';
 
 interface Movie {
     id: number;
@@ -11,17 +11,17 @@ interface Movie {
     year: number;
 }
 
-interface PopularMovieListProps {
+interface TopRatedMovieListProps {
     title: string;
 }
 
-const TrendingMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
+const TopRatedMovieList: React.FC<TopRatedMovieListProps> = ({ title }) => {
     const {
         data: response,
         isLoading,
         isError,
         error,
-    } = usePopularMoviesQuery();
+    } = useTopRatedMoviesQuery();
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error: {error.message}</p>;
@@ -36,7 +36,8 @@ const TrendingMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
                         {title}
                     </h2>
                     <p className="text-lg text-center font-medium animate-slide-up">
-                        Discover the most popular movies of the moment.
+                        Explore the highest-rated movies that are making waves
+                        right now.
                     </p>
                 </div>
             </div>
@@ -67,4 +68,4 @@ const TrendingMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
     );
 };
 
-export default TrendingMovieList;
+export default TopRatedMovieList;

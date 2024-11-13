@@ -1,14 +1,14 @@
 import React from 'react';
-import TrendingMovieList from './components/TopRatedList/TopRatedList';
+import TopRatedList from './components/TopRatedList/TopRatedList';
 
-const MovieTrendingPage: React.FC = () => {
+const MovieTopRatedPage: React.FC = () => {
     return (
         <div className="container mx-auto p-4 mt-16 max-w-[1024px]">
             <div className="px-8">
-                <TrendingMovieList title="Movies List" />
+                <TopRatedList title="Top Rated" />
             </div>
         </div>
     );
 };
 
-export default MovieTrendingPage;
+export default MovieTopRatedPage;
