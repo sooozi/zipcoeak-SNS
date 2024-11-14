@@ -10,6 +10,7 @@ import MovieNowPlayingPage from './page/MovieNowPlaying/MovieNowPlaying';
 import MovieTopRatedPage from './page/MovieTopRated/MovieTopRated';
 import MovieUpcomingPage from './page/MovieUpcoming/MovieUpcoming';
 import NotFoundPage from './page/NotFoundPage/NotFoundPage';
+import SearchPage from './page/Search/SearchPage';
 
 const App: React.FC = () => {
     return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
                 <Route path="upcomingList" element={<MovieUpcomingPage />} />
 
                 <Route path="login" element={<LoginPage />} />
+                <Route path="search" element={<SearchPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Route>
         </Routes>
