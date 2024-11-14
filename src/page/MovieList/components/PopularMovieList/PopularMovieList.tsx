@@ -32,11 +32,11 @@ const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
         <div className="space-y-4">
             <div className="py-20">
                 <div className="items-center space-y-2">
-                    <h2 className="text-5xl font-bold text-white text-center tracking-wide animate-slide-up">
+                    <h2 className="text-5xl font-bold text-white text-center tracking-wide animate-slide-up mb-5">
                         {title}
                     </h2>
                     <p className="text-lg text-center font-medium animate-slide-up">
-                        Discover the most popular movies of the moment.
+                        Discover the most popular movies of the moment!
                     </p>
                 </div>
             </div>

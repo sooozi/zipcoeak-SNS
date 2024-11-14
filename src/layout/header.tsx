@@ -85,18 +85,18 @@ const Header: React.FC = () => {
                             </Link>
                         </li> */}
                         <li>
-                            <Link to="/nowPlayingList">
-                                <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
-                                    <Play className="mr-1" size={18} />
-                                    <span>Now Playing</span>
-                                </div>
-                            </Link>
-                        </li>
-                        <li>
                             <Link to="/movieList">
                                 <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
                                     <TrendingUp className="mr-1" size={18} />
                                     <span>Trending</span>
+                                </div>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/nowPlayingList">
+                                <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
+                                    <Play className="mr-1" size={18} />
+                                    <span>Now Playing</span>
                                 </div>
                             </Link>
                         </li>
