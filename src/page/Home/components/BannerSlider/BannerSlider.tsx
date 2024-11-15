@@ -3,7 +3,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'; // Import arrows from 
 import { useState } from 'react';
 import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovie';
 
-// TMDb API에서 가져오는 영화 데이터 타입 정의
 interface Movie {
     id: number;
     title: string;
@@ -11,7 +10,6 @@ interface Movie {
     poster_path: string;
 }
 
-// 배너 데이터 타입 정의
 interface Banner {
     id: number;
     title: string;
