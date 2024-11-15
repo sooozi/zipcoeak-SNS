@@ -84,7 +84,7 @@ const BannerSlider = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
             >
-                <div className="text-white text-center px-5 md:px-10">
+                <div className="text-white text-center px-5 md:px-10 max-w-[1024px]">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">
                         {currentBanner.title}
                     </h2>

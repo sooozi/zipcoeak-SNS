@@ -13,7 +13,7 @@ const Header: React.FC = () => {
     const [scrolled, setScrolled] = useState(false);
     const [nickname, setNickname] = useState<string | null>(null);
 
-    // 페이지 로드 시 로컬 스토리지에서 닉네임을 가져와서 상태 업데이트
+    // 페이지 로드 시 로컬 스토리지에서 닉네임을 가져와 상태 업데이트
     useEffect(() => {
         const storedNickname = localStorage.getItem('nickname');
         if (storedNickname) {
