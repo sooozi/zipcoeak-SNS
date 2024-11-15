@@ -1,5 +1,4 @@
 // App.tsx
-import React from 'react';
 import { Route, Routes } from 'react-router';
 import AppLayout from './layout/AppLayout';
 import Home from './page/Home/Home';
@@ -12,7 +11,7 @@ import MovieUpcomingPage from './page/MovieUpcoming/MovieUpcoming';
 import NotFoundPage from './page/NotFoundPage/NotFoundPage';
 import SearchPage from './page/Search/SearchPage';
 
-const App: React.FC = () => {
+const App = () => {
     return (
         <Routes>
             <Route path="/" element={<AppLayout />}>
@@ -21,12 +20,18 @@ const App: React.FC = () => {
                     <Route index element={<MovieListPage />} />
                     <Route path=":id" element={<MovieDetailPage />} />
                 </Route>
-                <Route
-                    path="nowPlayingList"
-                    element={<MovieNowPlayingPage />}
-                />
-                <Route path="topRatedList" element={<MovieTopRatedPage />} />
-                <Route path="upcomingList" element={<MovieUpcomingPage />} />
+                <Route path="nowPlayingList">
+                    <Route index element={<MovieNowPlayingPage />} />
+                    <Route path=":id" element={<MovieDetailPage />} />
+                </Route>
+                <Route path="topRatedList">
+                    <Route index element={<MovieTopRatedPage />} />
+                    <Route path=":id" element={<MovieDetailPage />} />
+                </Route>
+                <Route path="upcomingList">
+                    <Route index element={<MovieUpcomingPage />} />
+                    <Route path=":id" element={<MovieDetailPage />} />
+                </Route>
 
                 <Route path="login" element={<LoginPage />} />
                 <Route path="search" element={<SearchPage />} />
