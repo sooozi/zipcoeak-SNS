@@ -7,7 +7,14 @@ import tseslint from 'typescript-eslint';
 
 export default [
     { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
-    { languageOptions: { globals: globals.browser } },
+    {
+        languageOptions: {
+            globals: {
+                ...globals.browser,
+                ...globals.node, // Node.js 환경의 글로벌 객체 추가
+            },
+        },
+    },
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
     pluginReact.configs.flat.recommended,
@@ -18,6 +25,9 @@ export default [
             react: {
                 version: '18', // React 버전 18 설정
             },
+        },
+        rules: {
+            'react/react-in-jsx-scope': 'off', // React import 필요성 해제
         },
     },
 ];

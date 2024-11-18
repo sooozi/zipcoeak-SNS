@@ -1,17 +1,18 @@
 {
     "compilerOptions": {
-        "outDir": "./dist", // 빌드된 파일이 저장될 경로
-        "module": "ESNext", // ES 모듈을 사용
-        "target": "ESNext", // 최신 자바스크립트 기능 사용
-        "noEmit": false, // 출력 파일을 생성
-        "strict": true, // 엄격한 타입 검사를 활성화
-        "esModuleInterop": true, // ES 모듈과 CommonJS 모듈의 호환성 제공
-        "skipLibCheck": true, // 라이브러리 타입 검사를 건너뛰기
-        "forceConsistentCasingInFileNames": true, // 대소문자 구분을 강제
-        "jsx": "react-jsx", // React 17 이상 버전의 JSX 변환을 위한 설정
-        "moduleResolution": "node", // Node.js 모듈 해석 방식을 사용
-        "resolveJsonModule": true // JSON 모듈을 import할 수 있도록 설정
+        "outDir": "./dist",
+        "module": "ESNext",
+        "target": "ESNext",
+        "noEmit": false,
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "react-jsx",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "types": ["vite/client", "node"] // node 타입을 추가합니다.
     },
-    "include": ["src/**/*"], // src 폴더 내 모든 파일을 포함
-    "exclude": ["dist"] // dist 폴더 제외
+    "include": ["src/**/*"],
+    "exclude": ["dist"]
 }
