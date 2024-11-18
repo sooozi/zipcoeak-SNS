@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react'; // Import arrows from lucide-react
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovie';
 
@@ -47,7 +47,7 @@ const BannerSlider = () => {
         setCurrentIndex(
             prevIndex =>
                 (prevIndex - 1 + bannerData.length) % bannerData.length,
-        ); // 이전 슬라이드로 이동
+        );
     };
 
     const currentBanner = bannerData[currentIndex];
@@ -57,7 +57,6 @@ const BannerSlider = () => {
             {/* 배경 흐림 효과 */}
             <div className="absolute inset-0 bg-black opacity-50 backdrop-blur-sm z-20"></div>
 
-            {/* 슬라이드 이미지 애니메이션: scale과 rotate 효과 */}
             <motion.div
                 key={currentBanner.id}
                 className="absolute inset-0"
@@ -65,6 +64,7 @@ const BannerSlider = () => {
                     backgroundImage: `url(${currentBanner.imageUrl})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
+                    filter: 'contrast(1.1) brightness(1.1)',
                 }}
                 initial={{ opacity: 0, scale: 1.2, rotate: 10 }}
                 animate={{

@@ -6,10 +6,11 @@ interface Movie {
     title: string;
     imageUrl: string;
     rating: number;
+    year: number;
 }
 
 interface ReleaseDatesResponse {
-    iso_3166_1: string;
+    iso_3166_1: string; //국가: 한국
     release_dates: { release_date: string }[];
 }
 
@@ -28,23 +29,36 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`;
         try {
             const response = await fetch(url);
+            if (!response.ok) {
+                console.error('Failed to fetch release dates');
+                setReleaseDate(null); // 실패 시 명시적으로 null 설정
+                return;
+            }
             const data = await response.json();
             const releaseDates: ReleaseDatesResponse[] = data.results;
 
-            // 예시: 한국(KR) 개봉일 정보 찾기
             const koreanRelease = releaseDates.find(
                 release => release.iso_3166_1 === 'KR',
             );
-            if (koreanRelease && koreanRelease.release_dates.length > 0) {
+
+            if (
+                koreanRelease &&
+                koreanRelease.release_dates &&
+                koreanRelease.release_dates.length > 0
+            ) {
                 setReleaseDate(koreanRelease.release_dates[0].release_date);
+            } else {
+                setReleaseDate(null); // 적합한 데이터가 없을 경우
             }
         } catch (error) {
             console.error('Error fetching release date:', error);
+            setReleaseDate(null); // 에러 발생 시 null 설정
         }
     };
 
     useEffect(() => {
-        fetchReleaseDate(movie.id); // 영화 ID로 개봉일 정보 fetch
+        if (!movie.id) return; // movie.id가 없으면 fetch 호출하지 않음
+        fetchReleaseDate(movie.id);
     }, [movie.id]);
 
     // Release Date 포맷팅
@@ -82,11 +96,27 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
             >
                 <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
                 {releaseDate ? (
-                    <p>Release: {formatReleaseDate(releaseDate)}</p>
+                    <p>🗓️ Release: {formatReleaseDate(releaseDate)}</p>
                 ) : (
-                    <p>Release: ⌛ Loading...</p>
+                    <p>🗓️ Release: {movie.year}</p>
                 )}
-                <p>Rating: {formatRating(movie.rating)}/10</p>
+                <p className="">
+                    🏆 Rating:{' '}
+                    <span
+                        className=""
+                        style={{
+                            color:
+                                movie.rating >= 8
+                                    ? '#ffdf6d'
+                                    : movie.rating <= 5
+                                      ? '#5d7ba3'
+                                      : 'inherit',
+                        }}
+                    >
+                        {formatRating(movie.rating)}
+                    </span>
+                    /10
+                </p>
             </div>
         </div>
     );

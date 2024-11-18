@@ -11,7 +11,7 @@
         "jsx": "react-jsx",
         "moduleResolution": "node",
         "resolveJsonModule": true,
-        "types": ["vite/client", "node"] // node 타입을 추가합니다.
+        "types": ["node"] // node 타입을 추가합니다.
     },
     "include": ["src/**/*"],
     "exclude": ["dist"]
