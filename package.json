@@ -1,7 +1,7 @@
 {
     "name": "zipcoak-sns",
     "version": "1.0.0",
-    "description": "📱[SNS App] 다양한 기능을 갖춘 소셜 네트워킹 웹사이트 프로젝트",
+    "description": "📽️ [Movie App] 다양한 기능을 갖춘 영화 웹사이트 프로젝트",
     "type": "module",
     "main": "index.js",
     "scripts": {
@@ -76,7 +76,6 @@
         "webpack-dev-server": "^5.1.0"
     },
     "lint-staged": {
-        "*.js": "eslint --fix",
-        "*.ts": "eslint --fix"
+        "*.{js,ts}": "eslint --fix --ignore-pattern 'dist/**'"
     }
 }
