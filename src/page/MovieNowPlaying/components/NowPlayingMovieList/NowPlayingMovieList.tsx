@@ -15,7 +15,7 @@ interface PopularMovieListProps {
     title: string;
 }
 
-const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
+const TrendingMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
     const {
         data: response,
         isLoading,
@@ -67,4 +67,4 @@ const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
     );
 };
 
-export default PopularMovieList;
+export default TrendingMovieList;

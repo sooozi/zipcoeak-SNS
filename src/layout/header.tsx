@@ -1,4 +1,11 @@
-import { Film, LogIn, Search, Sliders, Star, TrendingUp } from 'lucide-react';
+import {
+    Calendar,
+    LogIn,
+    Play,
+    Search,
+    TrendingUp,
+    Trophy,
+} from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -78,16 +85,15 @@ const Header: React.FC = () => {
                             </Link>
                         </li> */}
                         <li>
-                            <Link to="/movieList">
+                            <Link to="/nowPlayingList">
                                 <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
-                                    <Film className="mr-1" size={18} />
-                                    <span>Movie List</span>
+                                    <Play className="mr-1" size={18} />
+                                    <span>Now Playing</span>
                                 </div>
                             </Link>
                         </li>
-                        {/* 추가된 탭들 */}
                         <li>
-                            <Link to="/trending">
+                            <Link to="/movieList">
                                 <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
                                     <TrendingUp className="mr-1" size={18} />
                                     <span>Trending</span>
@@ -95,18 +101,18 @@ const Header: React.FC = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/picks">
+                            <Link to="/topRatedList">
                                 <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
-                                    <Star className="mr-1" size={18} />
-                                    <span>Top Picks</span>
+                                    <Trophy className="mr-1" size={18} />
+                                    <span>Top Rated</span>
                                 </div>
                             </Link>
                         </li>
                         <li>
-                            <Link to="/genres">
+                            <Link to="/upcomingList">
                                 <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
-                                    <Sliders className="mr-1" size={18} />
-                                    <span>Genres</span>
+                                    <Calendar className="mr-1" size={18} />
+                                    <span>Upcoming</span>
                                 </div>
                             </Link>
                         </li>
