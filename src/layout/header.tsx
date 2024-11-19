@@ -1,11 +1,19 @@
-import { Film, Home, LogIn } from 'lucide-react';
+import { Film, LogIn, Search, Sliders, Star, TrendingUp } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
     const [scrolled, setScrolled] = useState(false);
+    const [nickname, setNickname] = useState<string | null>(null);
 
+    // 페이지 로드 시 로컬 스토리지에서 닉네임을 가져와서 상태 업데이트
     useEffect(() => {
+        const storedNickname = localStorage.getItem('nickname');
+        if (storedNickname) {
+            setNickname(storedNickname);
+        }
+
+        // 스크롤 이벤트 처리
         const handleScroll = () => {
             if (window.scrollY > 50) {
                 setScrolled(true);
@@ -16,8 +24,25 @@ const Header: React.FC = () => {
 
         window.addEventListener('scroll', handleScroll);
 
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        // 로컬 스토리지에서 닉네임 변경 사항을 감지하여 상태 업데이트
+        const handleStorageChange = () => {
+            const updatedNickname = localStorage.getItem('nickname');
+            setNickname(updatedNickname);
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('storage', handleStorageChange); // 이벤트 리스너 정리
+        };
+    }, []); // 컴포넌트가 마운트될 때만 실행
+
+    // 로그아웃 함수
+    const handleLogout = () => {
+        localStorage.removeItem('nickname');
+        setNickname(null); // 상태 업데이트
+    };
 
     return (
         <header
@@ -25,16 +50,16 @@ const Header: React.FC = () => {
             ${scrolled ? 'shadow-xl backdrop-blur-sm' : 'shadow-lg'}`}
             style={{
                 background: scrolled
-                    ? 'linear-gradient(to right, rgba(55, 65, 81, 0.5), rgba(55, 65, 81, 0.5))' // 투명도 적용된 그라데이션
-                    : 'linear-gradient(to right, rgba(31, 41, 55, 1), rgba(31, 41, 55, 1))', // 기본 불투명 그라데이션
+                    ? 'linear-gradient(to right, rgba(55, 65, 81, 0.5), rgba(55, 65, 81, 0.5))'
+                    : 'linear-gradient(to right, rgba(31, 41, 55, 1), rgba(31, 41, 55, 1))',
                 transition:
-                    'background 0.5s ease, box-shadow 0.5s ease, backdrop-filter 0.5s ease', // 모든 스타일에 트랜지션 추가
+                    'background 0.5s ease, box-shadow 0.5s ease, backdrop-filter 0.5s ease',
             }}
         >
             <div className="container mx-auto px-4">
                 <nav className="flex items-center justify-between h-16">
-                    {/* Logo on the left */}
-                    <Link to="/" className="">
+                    {/* 로고 */}
+                    <Link to="/" className="flex items-center">
                         <img
                             src="/img/logo_bl.png"
                             className="App-logo w-32 filter invert transition-all duration-500"
@@ -42,37 +67,84 @@ const Header: React.FC = () => {
                         />
                     </Link>
 
-                    {/* Central menu */}
-                    <ul className="flex space-x-4 mx-auto">
-                        <li>
+                    {/* 중앙 메뉴 */}
+                    <ul className="flex space-x-8 mx-auto">
+                        {/* <li>
                             <Link to="/">
                                 <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
                                     <Home className="mr-1" size={18} />
                                     <span>Home</span>
                                 </div>
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
-                            <Link to="/movies">
+                            <Link to="/movieList">
                                 <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
                                     <Film className="mr-1" size={18} />
                                     <span>Movie List</span>
                                 </div>
                             </Link>
                         </li>
+                        {/* 추가된 탭들 */}
+                        <li>
+                            <Link to="/trending">
+                                <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
+                                    <TrendingUp className="mr-1" size={18} />
+                                    <span>Trending</span>
+                                </div>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/picks">
+                                <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
+                                    <Star className="mr-1" size={18} />
+                                    <span>Top Picks</span>
+                                </div>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/genres">
+                                <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
+                                    <Sliders className="mr-1" size={18} />
+                                    <span>Genres</span>
+                                </div>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/search">
+                                <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
+                                    <Search className="mr-1" size={18} />
+                                    <span>Search</span>
+                                </div>
+                            </Link>
+                        </li>
                     </ul>
 
-                    {/* Login button on the right */}
-                    <div className="ml-auto">
-                        <Link
-                            to="/login"
-                            className="hover:text-gray-300 transition-colors duration-300"
-                        >
-                            <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
-                                <LogIn className="mr-1" size={18} />
-                                <span>Login</span>
+                    {/* 로그인 버튼 또는 닉네임 */}
+                    <div className="">
+                        {nickname ? (
+                            <div className="flex items-center">
+                                <span className="text-white">
+                                    🙋‍♀️ Hi! {nickname}
+                                </span>
+                                <button
+                                    onClick={handleLogout}
+                                    className="ml-4 bg-gray-900 text-white text-xs font-semibold py-1 px-3 rounded-full text-sm hover:bg-red-900"
+                                >
+                                    Logout
+                                </button>
                             </div>
-                        </Link>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="hover:text-gray-300 transition-colors duration-300"
+                            >
+                                <div className="flex items-center hover:text-gray-300 transition-colors duration-300">
+                                    <LogIn className="mr-1" size={18} />
+                                    <span>Login</span>
+                                </div>
+                            </Link>
+                        )}
                     </div>
                 </nav>
             </div>
