@@ -25,7 +25,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
 
     // TMDb API에서 영화의 개봉일 정보 가져오는 함수
     const fetchReleaseDate = async (movieId: number) => {
-        const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+        const apiKey = process.env.REACT_APP_API_KEY;
         const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`;
         try {
             const response = await fetch(url);

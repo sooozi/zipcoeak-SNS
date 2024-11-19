@@ -5,7 +5,7 @@ import webpack from 'webpack';
 // __dirname 대체 방법
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.REACT_APP_API_KEY === 'production';
 
 const config = {
     mode: isProduction ? 'production' : 'development',
@@ -29,20 +29,21 @@ const config = {
             options: {
                 ignored: [
                     '**/node_modules/**',
-                    'C:/DumpStack.log.tmp', // 문제 파일 명시적으로 제외
+                    '**/dist/**', // dist 폴더 제외
+                    '**/*.log', // 로그 파일 제외
+                    'C:/DumpStack.log.tmp', // 문제 파일 제외
                 ],
             },
         },
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public', 'index.html'),
+            template: path.resolve(__dirname, 'index.html'), // 루트의 index.html을 명확히 지정
         }),
         new webpack.DefinePlugin({
             'process.env.REACT_APP_API_KEY': JSON.stringify(
                 process.env.REACT_APP_API_KEY,
             ),
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
     ],
     module: {
