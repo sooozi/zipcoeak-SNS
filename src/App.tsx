@@ -1,5 +1,4 @@
 // App.tsx
-import React from 'react';
 import { Route, Routes } from 'react-router';
 import AppLayout from './layout/AppLayout';
 import Home from './page/Home/Home';
@@ -12,7 +11,7 @@ import MovieUpcomingPage from './page/MovieUpcoming/MovieUpcoming';
 import NotFoundPage from './page/NotFoundPage/NotFoundPage';
 import SearchPage from './page/Search/SearchPage';
 
-const App: React.FC = () => {
+const App = () => {
     return (
         <Routes>
             <Route path="/" element={<AppLayout />}>
