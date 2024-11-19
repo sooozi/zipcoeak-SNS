@@ -3,7 +3,10 @@ import path from 'path';
 import webpack from 'webpack';
 
 // __dirname 대체 방법
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.resolve();
+
+// 또는 경로가 루트에 index.html이 있는 경우
+const templatePath = path.join(__dirname, 'index.html');
 
 const isProduction = process.env.REACT_APP_API_KEY === 'production';
 
@@ -38,7 +41,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'index.html'),
+            template: templatePath, // 올바른 경로로 수정
         }),
         new webpack.DefinePlugin({
             'process.env.REACT_APP_API_KEY': JSON.stringify(
