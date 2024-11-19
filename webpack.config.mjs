@@ -1,6 +1,10 @@
+import dotenv from 'dotenv';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
+
+// .env 파일 로드
+dotenv.config();
 
 // __dirname 대체 방법
 const __dirname = path.resolve();
@@ -9,6 +13,8 @@ const __dirname = path.resolve();
 const templatePath = path.join(__dirname, 'index.html');
 
 const isProduction = process.env.REACT_APP_API_KEY === 'production';
+
+console.log('API Key from process.env:', process.env.REACT_APP_API_KEY);
 
 const config = {
     mode: isProduction ? 'production' : 'development',
@@ -46,6 +52,8 @@ const config = {
         new webpack.DefinePlugin({
             'process.env.REACT_APP_API_KEY': JSON.stringify(
                 process.env.REACT_APP_API_KEY,
+                // '81a92362658e35f04c2b390845ea5f68',
+                // apiKey,
             ),
         }),
     ],

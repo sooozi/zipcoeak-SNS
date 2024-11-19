@@ -29,13 +29,15 @@ const BannerSlider = () => {
 
     const movies = data?.data?.results || []; // 영화 목록
 
-    // BannerData 구조로 매핑
+    // BannerData 구조로 매핑, poster_path가 없으면 기본 이미지로 대체
     const bannerData: Banner[] = movies.map((movie: Movie) => {
         return {
             id: movie.id,
             title: movie.title,
             overview: movie.overview,
-            imageUrl: `https://media.themoviedb.org/t/p/w533_and_h300_bestv2${movie.poster_path}`, // 포스터 이미지 URL
+            imageUrl: movie.poster_path
+                ? `https://media.themoviedb.org/t/p/w533_and_h300_bestv2${movie.poster_path}`
+                : 'https://via.placeholder.com/533x300?text=No+Image', // 포스터가 없으면 대체 이미지 사용
         };
     });
 
@@ -61,7 +63,7 @@ const BannerSlider = () => {
                 key={currentBanner.id}
                 className="absolute inset-0"
                 style={{
-                    backgroundImage: `url(${currentBanner.imageUrl})`,
+                    backgroundImage: `url(${currentBanner.imageUrl})`, // imageUrl을 사용
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     filter: 'contrast(1.1) brightness(1.1)',
@@ -97,15 +99,13 @@ const BannerSlider = () => {
                 onClick={goToPreviousSlide}
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full opacity-50 hover:opacity-100 z-40"
             >
-                <ChevronLeft size={22} color="black" />{' '}
-                {/* 사용된 왼쪽 화살표 아이콘 */}
+                <ChevronLeft size={22} color="black" />
             </button>
             <button
                 onClick={goToNextSlide}
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full opacity-50 hover:opacity-100 z-40"
             >
-                <ChevronRight size={22} color="black" />{' '}
-                {/* 사용된 오른쪽 화살표 아이콘 */}
+                <ChevronRight size={22} color="black" />
             </button>
         </div>
     );
