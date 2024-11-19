@@ -11,9 +11,9 @@ const config = {
     mode: isProduction ? 'production' : 'development',
     entry: './src/index.tsx',
     output: {
-        path: path.resolve(__dirname, 'dist'), // __dirname을 대체한 코드
-        filename: isProduction ? '[name].[contenthash].js' : '[name].js', // 청크마다 고유한 이름 설정
-        clean: true, // 빌드 전 dist 폴더를 깨끗하게 비움
+        path: path.resolve(__dirname, 'dist'),
+        filename: isProduction ? '[name].[contenthash].js' : '[name].js',
+        clean: true,
     },
     devServer: {
         open: true,
@@ -22,14 +22,21 @@ const config = {
         hot: true,
         static: {
             directory: path.resolve(__dirname, 'public'),
-            watch: {
-                ignored: ['C:/DumpStack.log.tmp', /node_modules/], // 파일을 무시하도록 수정
+            watch: false, // 감시 기능 끔
+        },
+        watchFiles: {
+            paths: ['src/**/*'], // 필요한 파일만 감시
+            options: {
+                ignored: [
+                    '**/node_modules/**',
+                    'C:/DumpStack.log.tmp', // 문제 파일 명시적으로 제외
+                ],
             },
         },
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public', 'index.html'), // 템플릿 경로 절대 경로로 수정
+            template: path.resolve(__dirname, 'public', 'index.html'),
         }),
         new webpack.DefinePlugin({
             'process.env.REACT_APP_API_KEY': JSON.stringify(
@@ -60,7 +67,7 @@ const config = {
     },
     optimization: {
         splitChunks: {
-            chunks: 'all', // 모든 청크를 분리
+            chunks: 'all',
         },
     },
 };
