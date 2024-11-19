@@ -48,7 +48,7 @@
         "autoprefixer": "^10.4.20",
         "babel-loader": "^9.2.1",
         "css-loader": "^7.1.2",
-        "eslint": "^9.13.0",
+        "eslint": "^9.15.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-formatter-codeframe": "^7.32.1",
         "eslint-plugin-prettier": "^5.2.1",
@@ -69,5 +69,10 @@
         "webpack": "^5.96.1",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.1.0"
+    },
+    "lint-staged": {
+        "*.js": "eslint --fix",
+        "*.ts": "eslint --fix",
+        "*.css": "stylelint --fix"
     }
 }
