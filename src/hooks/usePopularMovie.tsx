@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import api from '../utils/api';
 
+// 인기 영화 데이터를 가져오는 함수
 const fetchPopularMovies = () => {
-    // API 키를 URL 쿼리 파라미터로 전달
     return api.get(
-        `/movie/popular?api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
+        `/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`, // Webpack 환경변수 사용
     );
 };
 
+// React Query로 인기 영화 데이터를 가져오는 커스텀 훅
 export const usePopularMoviesQuery = () => {
     return useQuery({
         queryKey: ['movie-popular'],
