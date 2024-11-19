@@ -38,7 +38,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'index.html'), // 루트의 index.html을 명확히 지정
+            template: path.resolve(__dirname, 'public', 'index.html'),
         }),
         new webpack.DefinePlugin({
             'process.env.REACT_APP_API_KEY': JSON.stringify(
