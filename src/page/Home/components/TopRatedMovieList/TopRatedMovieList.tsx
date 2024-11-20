@@ -1,8 +1,8 @@
+import { useTopRatedMoviesQuery } from '@/queries/topRated/useTopRatedMoviesQuery';
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useTopRatedMoviesQuery } from '../../../../hooks/useTopRatedMovie';
 
 interface Movie {
     id: number;

@@ -1,8 +1,8 @@
+import { useUpComingMoviesQuery } from '@/queries/upComing/useUpComingMoviesQuery';
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useUpComingMoviesQuery } from '../../../../hooks/useUpComingMovie';
 
 interface Movie {
     id: number;

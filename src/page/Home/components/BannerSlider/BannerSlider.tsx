@@ -1,7 +1,7 @@
+import { usePopularMoviesQuery } from '@/queries/popular/usePopularMoviesQuery';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
-import { usePopularMoviesQuery } from '../../../../queries/popular/usePopularMoviesQuery';
 
 interface Movie {
     id: number;
