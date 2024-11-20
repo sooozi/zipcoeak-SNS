@@ -30,7 +30,7 @@ const BannerSlider = () => {
     const movies = data?.data?.results || []; // 영화 목록
 
     // BannerData 구조로 매핑, poster_path가 없으면 기본 이미지로 대체
-    const bannerData: Banner[] = movies.map((movie: Movie) => {
+    const bannerData: Banner[] = movies?.map((movie: Movie) => {
         return {
             id: movie.id,
             title: movie.title,

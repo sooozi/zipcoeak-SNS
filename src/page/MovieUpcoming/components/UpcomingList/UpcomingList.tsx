@@ -43,7 +43,7 @@ const TrendingMovieList: React.FC<UpcomingMovieListProps> = ({ title }) => {
             <div className="relative">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 pb-4 place-items-center">
                     {movies.length > 0 ? (
-                        movies.map((movie: Movie) => {
+                        movies?.map((movie: Movie) => {
                             const mappedMovie = {
                                 id: movie.id,
                                 title: movie.title,

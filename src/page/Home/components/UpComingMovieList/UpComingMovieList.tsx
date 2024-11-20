@@ -44,7 +44,7 @@ const UpComingMovieList: React.FC<UpComingMovieListProps> = ({ title }) => {
             <div className="relative">
                 <div className="flex space-x-4 overflow-x-auto pb-4 custom-scrollbar">
                     {movies.length > 0 ? (
-                        movies.map((movie: Movie) => {
+                        movies?.map((movie: Movie) => {
                             // API 응답에서 필요한 데이터만 추출해서 MovieCard에 전달
                             const mappedMovie = {
                                 id: movie.id,
