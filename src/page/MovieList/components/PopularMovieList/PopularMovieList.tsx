@@ -1,6 +1,6 @@
+import { usePopularMoviesQuery } from '@/queries/popular/usePopularMoviesQuery';
 import React from 'react';
 import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovie';
 
 interface Movie {
     id: number;

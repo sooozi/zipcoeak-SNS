@@ -14,8 +14,6 @@ const templatePath = path.join(__dirname, 'index.html');
 
 const isProduction = process.env.REACT_APP_API_KEY === 'production';
 
-console.log('API Key from process.env:', process.env.REACT_APP_API_KEY);
-
 const config = {
     mode: isProduction ? 'production' : 'development',
     entry: './src/index.tsx',
@@ -52,8 +50,6 @@ const config = {
         new webpack.DefinePlugin({
             'process.env.REACT_APP_API_KEY': JSON.stringify(
                 process.env.REACT_APP_API_KEY,
-                // '81a92362658e35f04c2b390845ea5f68',
-                // apiKey,
             ),
         }),
     ],
@@ -76,6 +72,9 @@ const config = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js'],
+        alias: {
+            '@': path.resolve(__dirname, 'src'), // @를 src로 매핑
+        },
     },
     optimization: {
         splitChunks: {
