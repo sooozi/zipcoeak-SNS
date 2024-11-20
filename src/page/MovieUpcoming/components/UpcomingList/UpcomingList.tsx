@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useUpComingMoviesQuery } from '../../../../hooks/useUpComingMovie';
+import { useUpComingMoviesQuery } from '../../../../queries/upComing/useUpComingMovie';
 
 interface Movie {
     id: number;

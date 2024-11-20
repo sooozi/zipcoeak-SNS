@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import api from '../utils/api';
+import api from '../../utils/api';
 
 const fetchTopRatedMovies = () => {
     // API 키를 URL 쿼리 파라미터로 전달

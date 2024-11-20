@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useNowPlayingMoviesQuery } from '../../../../hooks/useNowPlayingMovie';
+import { useNowPlayingMoviesQuery } from '../../../../queries/nowPlaying/useNowPlayingMovie';
 
 interface Movie {
     id: number;
