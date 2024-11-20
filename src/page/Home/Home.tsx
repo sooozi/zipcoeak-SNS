@@ -1,5 +1,3 @@
-'use client';
-
 import BannerSlider from '../Home/components/BannerSlider/BannerSlider';
 import PopularMovieList from '../Home/components/PopularMovieList/PopularMovieList';
 import TopRatedMovieList from '../Home/components/TopRatedMovieList/TopRatedMovieList';

@@ -1,8 +1,8 @@
+import MovieCard from '@/common/MovieCard/MovieCard';
 import { usePopularMoviesQuery } from '@/queries/popular/usePopularMoviesQuery';
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MovieCard from '../../../../common/MovieCard/MovieCard';
 
 interface Movie {
     id: number;

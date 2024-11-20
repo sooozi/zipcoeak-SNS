@@ -1,6 +1,6 @@
+import MovieCard from '@/common/MovieCard/MovieCard';
+import { useNowPlayingMoviesQuery } from '@/queries/nowPlaying/useNowPlayingMoviesQuery';
 import React from 'react';
-import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useNowPlayingMoviesQuery } from '../../../../queries/nowPlaying/useNowPlayingMoviesQuery';
 
 interface Movie {
     id: number;
