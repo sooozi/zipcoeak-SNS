@@ -16,9 +16,9 @@ interface NowPlayingMovieListProps {
 }
 
 const NowPlayingMovieList: React.FC<NowPlayingMovieListProps> = ({ title }) => {
-    const { data: response } = useNowPlayingMoviesQuery();
+    const { data } = useNowPlayingMoviesQuery();
 
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">

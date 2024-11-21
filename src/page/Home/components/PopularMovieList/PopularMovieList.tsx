@@ -18,9 +18,9 @@ interface PopularMovieListProps {
 }
 
 const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
-    const { data: response } = usePopularMoviesQuery();
+    const { data } = usePopularMoviesQuery();
 
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">

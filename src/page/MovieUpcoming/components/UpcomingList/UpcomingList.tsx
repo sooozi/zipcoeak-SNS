@@ -16,9 +16,9 @@ interface UpcomingMovieListProps {
 }
 
 const TrendingMovieList: React.FC<UpcomingMovieListProps> = ({ title }) => {
-    const { data: response } = useUpComingMoviesQuery();
+    const { data } = useUpComingMoviesQuery();
 
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">

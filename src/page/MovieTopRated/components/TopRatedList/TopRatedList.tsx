@@ -16,9 +16,9 @@ interface TopRatedMovieListProps {
 }
 
 const TopRatedMovieList: React.FC<TopRatedMovieListProps> = ({ title }) => {
-    const { data: response } = useTopRatedMoviesQuery();
+    const { data } = useTopRatedMoviesQuery();
 
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">

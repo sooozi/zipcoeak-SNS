@@ -23,7 +23,7 @@ const BannerSlider = () => {
     // usePopularMoviesQuery 훅을 사용하여 인기 영화 데이터 가져오기
     const { data } = usePopularMoviesQuery();
 
-    const movies = data?.data?.results || []; // 영화 목록
+    const movies = data?.results || []; // 영화 목록
 
     // BannerData 구조로 매핑, poster_path가 없으면 기본 이미지로 대체
     const bannerData: Banner[] =
