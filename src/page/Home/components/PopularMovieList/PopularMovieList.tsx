@@ -18,15 +18,7 @@ interface PopularMovieListProps {
 }
 
 const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = usePopularMoviesQuery();
-
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
+    const { data: response } = usePopularMoviesQuery();
 
     const movies = response?.data?.results || [];
 

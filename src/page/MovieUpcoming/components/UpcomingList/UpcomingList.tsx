@@ -16,15 +16,7 @@ interface UpcomingMovieListProps {
 }
 
 const TrendingMovieList: React.FC<UpcomingMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = useUpComingMoviesQuery();
-
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
+    const { data: response } = useUpComingMoviesQuery();
 
     const movies = response?.data?.results || [];
 

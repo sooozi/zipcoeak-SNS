@@ -16,15 +16,7 @@ interface NowPlayingMovieListProps {
 }
 
 const NowPlayingMovieList: React.FC<NowPlayingMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = useNowPlayingMoviesQuery();
-
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
+    const { data: response } = useNowPlayingMoviesQuery();
 
     const movies = response?.data?.results || [];
 

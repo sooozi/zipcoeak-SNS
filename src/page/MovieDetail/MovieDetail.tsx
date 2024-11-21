@@ -8,18 +8,15 @@ interface Movie {
     imageUrl: string;
     year: number;
     rating: number;
-    description: string; // Additional movie information
+    description: string;
 }
 
 const MovieDetail = () => {
-    const { movieId } = useParams<{ movieId: string }>(); // Get movieId from URL
+    const { movieId } = useParams<{ movieId: string }>();
     const [movie, setMovie] = useState<Movie | null>(null);
 
     useEffect(() => {
-        // Fetch the movie details based on the movieId (you can replace with your API call)
         const fetchMovieDetails = async () => {
-            // For the sake of example, we're assuming a hardcoded movie data.
-            // You should replace this with an actual API call to fetch movie details by ID.
             const fetchedMovie: Movie = {
                 id: parseInt(movieId || '0'),
                 title: '진행전',
@@ -37,7 +34,7 @@ const MovieDetail = () => {
     }, [movieId]);
 
     if (!movie) {
-        return <div>Loading...</div>; // Show loading state while fetching
+        return <div>Loading...</div>;
     }
 
     return (

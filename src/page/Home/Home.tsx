@@ -1,3 +1,5 @@
+import ErrorBoundary from '@/common/ErrorBoundary';
+import { Suspense } from 'react';
 import BannerSlider from '../Home/components/BannerSlider/BannerSlider';
 import PopularMovieList from '../Home/components/PopularMovieList/PopularMovieList';
 import TopRatedMovieList from '../Home/components/TopRatedMovieList/TopRatedMovieList';
@@ -7,17 +9,33 @@ export default function Home() {
     return (
         <div className="space-y-8 mt-16">
             <div className="w-full h-screen">
-                <BannerSlider />
+                <ErrorBoundary>
+                    <Suspense fallback={<p>Loading...</p>}>
+                        <BannerSlider />
+                    </Suspense>
+                </ErrorBoundary>
             </div>
 
             <div className="px-8">
-                <UpComingMovieList title="🎬 Upcoming Movies" />
+                <ErrorBoundary>
+                    <Suspense fallback={<p>Loading upcoming movies...</p>}>
+                        <UpComingMovieList title="🎬 Upcoming Movies" />
+                    </Suspense>
+                </ErrorBoundary>
             </div>
             <div className="px-8">
-                <PopularMovieList title="🔥 Popular Movies" />
+                <ErrorBoundary>
+                    <Suspense fallback={<p>Loading popular movies...</p>}>
+                        <PopularMovieList title="🔥 Popular Movies" />
+                    </Suspense>
+                </ErrorBoundary>
             </div>
             <div className="px-8">
-                <TopRatedMovieList title="🌟 Recommended Movies" />
+                <ErrorBoundary>
+                    <Suspense fallback={<p>Loading top-rated movies...</p>}>
+                        <TopRatedMovieList title="🌟 Recommended Movies" />
+                    </Suspense>
+                </ErrorBoundary>
             </div>
         </div>
     );

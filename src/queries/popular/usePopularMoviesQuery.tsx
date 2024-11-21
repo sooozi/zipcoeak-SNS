@@ -10,8 +10,6 @@ import api from '../../utils/api';
 const fetchPopularMovies = () => {
     if (!process.env.REACT_APP_API_KEY) {
         console.error('API 키가 정의되지 않았습니다.');
-    } else {
-        console.log('API 키:', process.env.REACT_APP_API_KEY);
     }
     return api.get(`/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`);
 };

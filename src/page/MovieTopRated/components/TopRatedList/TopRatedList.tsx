@@ -16,15 +16,7 @@ interface TopRatedMovieListProps {
 }
 
 const TopRatedMovieList: React.FC<TopRatedMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = useTopRatedMoviesQuery();
-
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
+    const { data: response } = useTopRatedMoviesQuery();
 
     const movies = response?.data?.results || [];
 
