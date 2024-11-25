@@ -51,6 +51,9 @@ const config = {
             'process.env.REACT_APP_API_KEY': JSON.stringify(
                 process.env.REACT_APP_API_KEY,
             ),
+            'process.env.REACT_APP_TMDB_BASE_URL': JSON.stringify(
+                process.env.REACT_APP_TMDB_BASE_URL,
+            ),
         }),
     ],
     module: {
