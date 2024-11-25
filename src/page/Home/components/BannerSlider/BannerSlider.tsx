@@ -19,6 +19,7 @@ interface Banner {
 
 const BannerSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const movieUrl = process.env.REACT_APP_TMDB_POSTER_URL;
 
     // usePopularMoviesQuery 훅을 사용하여 인기 영화 데이터 가져오기
     const { data } = usePopularMoviesQuery();
@@ -32,7 +33,8 @@ const BannerSlider = () => {
             title: movie.title,
             overview: movie.overview,
             imageUrl: movie.poster_path
-                ? `https://media.themoviedb.org/t/p/w533_and_h300_bestv2${movie.poster_path}`
+                ? // ? `https://media.themoviedb.org/t/p/w533_and_h300_bestv2${movie.poster_path}`
+                  `${movieUrl}/w533_and_h300_bestv2${movie.poster_path}`
                 : 'https://via.placeholder.com/500x750.png?text=No+Image', // 포스터가 없으면 대체 이미지 사용
         })) || [];
 
