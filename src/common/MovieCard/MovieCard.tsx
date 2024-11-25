@@ -15,7 +15,10 @@ interface Movie {
 //     release_dates: { release_date: string }[];
 // }
 
-const MovieCard = ({ movie }: { movie: Movie }) => {
+type Fn<Props> = (props: Props) => React.ReactNode;
+
+// const MovieCard = ({ movie }: { movie: Movie }) => {
+const MovieCard: Fn<{ movie: Movie }> = ({ movie }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [releaseDate, setReleaseDate] = useState<string | null>(null); // 개봉일 상태
     const navigate = useNavigate();
