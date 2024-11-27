@@ -27,41 +27,6 @@ const MovieCard: Fn<{ movie: Movie }> = ({ movie }) => {
         navigate(`/movieList/${movie.id}`);
     };
 
-    // TMDb API에서 영화의 개봉일 정보 가져오는 함수
-    // const fetchReleaseDate = async (movieId: number) => {
-    //     const apiKey = process.env.REACT_APP_API_KEY;
-    //     const movieUrl = process.env.REACT_APP_TMDB_BASE_URL;
-    //     // const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`;
-    //     const url = `${movieUrl}/${movieId}/release_dates?api_key=${apiKey}`;
-    //     try {
-    //         const response = await fetch(url);
-    //         if (!response.ok) {
-    //             console.error('Failed to fetch release dates');
-    //             setReleaseDate(null); // 실패 시 명시적으로 null 설정
-    //             return;
-    //         }
-    //         const data = await response.json();
-    //         const releaseDates: ReleaseDatesResponse[] = data.results;
-
-    //         const koreanRelease = releaseDates.find(
-    //             release => release.iso_3166_1 === 'KR',
-    //         );
-
-    //         if (
-    //             koreanRelease &&
-    //             koreanRelease.release_dates &&
-    //             koreanRelease.release_dates.length > 0
-    //         ) {
-    //             setReleaseDate(koreanRelease.release_dates[0].release_date);
-    //         } else {
-    //             setReleaseDate(null); // 적합한 데이터가 없을 경우
-    //         }
-    //     } catch (error) {
-    //         console.error('Error fetching release date:', error);
-    //         setReleaseDate(null); // 에러 발생 시 null 설정
-    //     }
-    // };
-
     useEffect(() => {
         if (!movie.id) return; // movie.id가 없으면 fetch 호출하지 않음
         fetchReleaseDate(movie.id);
