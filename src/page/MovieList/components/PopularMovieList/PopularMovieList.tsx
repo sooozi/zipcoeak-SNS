@@ -1,3 +1,4 @@
+import InfiniteSldier from '@/common/InfiniteSldier/InfiniteSldier';
 import MovieCard from '@/common/MovieCard/MovieCard';
 import { usePopularMoviesQuery } from '@/queries/popular/usePopularMoviesQuery';
 import React from 'react';
@@ -32,6 +33,15 @@ const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
                     </p>
                 </div>
             </div>
+            {/* 무한 슬라이더 */}
+            <div>
+                {movies.length > 0 ? (
+                    <InfiniteSldier movie={movies} />
+                ) : (
+                    <p>No movies available</p>
+                )}
+            </div>
+            {/* 카드 */}
             <div className="relative">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 pb-4 place-items-center">
                     {movies.length > 0 ? (
