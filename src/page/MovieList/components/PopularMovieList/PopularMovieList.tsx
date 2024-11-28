@@ -34,7 +34,7 @@ const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
                 </div>
             </div>
             {/* 무한 슬라이더 */}
-            <div>
+            <div className="pb-20">
                 {movies.length > 0 ? (
                     <InfiniteSldier movie={movies} />
                 ) : (
