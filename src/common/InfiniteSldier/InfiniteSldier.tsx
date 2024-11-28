@@ -7,6 +7,7 @@ interface Movie {
     imageUrl: string;
     rating: number;
     year: number;
+    poster_path: string | null;
 }
 
 type Fn<Props> = (props: Props) => React.ReactNode;
@@ -58,13 +59,14 @@ const InfiniteSlider: Fn<{ movie: Movie[] }> = ({ movie }) => {
                             className="movie-title flex-none"
                             style={{ width: 'calc(20% - 1rem)' }} // 1rem만큼 간격을 빼고 설정
                         >
-                            <div className="relative bg-gray-200 rounded-lg shadow-md h-full aspect-w-1 aspect-h-1 overflow-hidden">
-                                {/* 포스터 이미지 */}
-                                <img
-                                    src={movie.imageUrl}
-                                    alt={movie.title}
-                                    className="object-cover w-full h-full"
-                                />
+                            <div
+                                className="relative bg-gray-200 rounded-lg shadow-md h-full aspect-w-1 aspect-h-1 overflow-hidden"
+                                style={{
+                                    backgroundImage: `url(https://media.themoviedb.org/t/p/w533_and_h300_bestv2/${movie.poster_path})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                }}
+                            >
                                 {/* 영화 제목 */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm font-medium text-center">
                                     {movie.title}
