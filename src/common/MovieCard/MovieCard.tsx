@@ -1,3 +1,4 @@
+import { fetchReleaseDate } from '@/apis/tmdb';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,12 +10,15 @@ interface Movie {
     year: number;
 }
 
-interface ReleaseDatesResponse {
-    iso_3166_1: string; //국가: 한국
-    release_dates: { release_date: string }[];
-}
+// interface ReleaseDatesResponse {
+//     iso_3166_1: string; //국가: 한국
+//     release_dates: { release_date: string }[];
+// }
 
-const MovieCard = ({ movie }: { movie: Movie }) => {
+type Fn<Props> = (props: Props) => React.ReactNode;
+
+// const MovieCard = ({ movie }: { movie: Movie }) => {
+const MovieCard: Fn<{ movie: Movie }> = ({ movie }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [releaseDate, setReleaseDate] = useState<string | null>(null); // 개봉일 상태
     const navigate = useNavigate();
@@ -23,42 +27,29 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         navigate(`/movieList/${movie.id}`);
     };
 
-    // TMDb API에서 영화의 개봉일 정보 가져오는 함수
-    const fetchReleaseDate = async (movieId: number) => {
-        const apiKey = process.env.REACT_APP_API_KEY;
-        const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                console.error('Failed to fetch release dates');
-                setReleaseDate(null); // 실패 시 명시적으로 null 설정
-                return;
-            }
-            const data = await response.json();
-            const releaseDates: ReleaseDatesResponse[] = data.results;
+    //movie.id가 변경될 때마다 fetchReleaseDate(movie.id)를 호출하는 역할
+    //fetchReleaseDate는 비동기 함수이기 때문에, 이 코드에서는 fetchReleaseDate가 완료될 때까지 기다리지 않고 바로 다음 코드가 실행
+    //이로 인해 개봉일 정보가 상태에 반영되지 않음
+    // useEffect(() => {
+    //     if (!movie.id) return; // movie.id가 없으면 fetch 호출하지 않음
+    //     fetchReleaseDate(movie.id);
+    // }, [movie.id]);
 
-            const koreanRelease = releaseDates.find(
-                release => release.iso_3166_1 === 'KR',
-            );
-
-            if (
-                koreanRelease &&
-                koreanRelease.release_dates &&
-                koreanRelease.release_dates.length > 0
-            ) {
-                setReleaseDate(koreanRelease.release_dates[0].release_date);
-            } else {
-                setReleaseDate(null); // 적합한 데이터가 없을 경우
-            }
-        } catch (error) {
-            console.error('Error fetching release date:', error);
-            setReleaseDate(null); // 에러 발생 시 null 설정
-        }
-    };
+    // 🚨 위 코드의 문제점
+    // fetchReleaseDate를 호출했지만, 그 결과를 어떻게 처리할지 명확하게 지정되지 않았음
+    // 비동기 함수 실행 결과를 처리하지 않은 상태였기 때문에 releaseDate가 업데이트되지 않는 문제가 발생
 
     useEffect(() => {
         if (!movie.id) return; // movie.id가 없으면 fetch 호출하지 않음
-        fetchReleaseDate(movie.id);
+
+        // fetchReleaseDate를 호출하고, 그 결과를 상태에 저장
+        // 비동기 작업을 처리하기 위한 별도의 함수 정의
+        const getReleaseDate = async () => {
+            const date = await fetchReleaseDate(movie.id); // 결과를 기다림
+            setReleaseDate(date); // 결과를 상태에 설정
+        };
+
+        getReleaseDate();
     }, [movie.id]);
 
     // Release Date 포맷팅
