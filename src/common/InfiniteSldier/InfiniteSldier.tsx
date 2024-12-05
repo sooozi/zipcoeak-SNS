@@ -20,6 +20,7 @@ const InfiniteSlider: Fn<{ movie: Movie[] }> = ({ movie }) => {
 
     // 전체 슬라이드 페이지 수 계산 (올림)
     const totalPages = Math.ceil(movie.length / moviesPerPage);
+    // const totalPages = movie.length;
 
     // 현재 페이지 계산
     const currentPage = Math.floor(currentIndex / moviesPerPage);
@@ -57,7 +58,7 @@ const InfiniteSlider: Fn<{ movie: Movie[] }> = ({ movie }) => {
                         <div
                             key={movie.id}
                             className="movie-title flex-none"
-                            style={{ width: 'calc(20% - 1rem)' }} // 1rem만큼 간격을 빼고 설정
+                            style={{ width: 'calc(20% - 1rem)' }}
                         >
                             <div
                                 className="relative bg-gray-200 rounded-lg shadow-md h-full aspect-w-1 aspect-h-1 overflow-hidden"
