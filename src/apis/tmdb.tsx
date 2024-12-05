@@ -15,7 +15,10 @@ export const fetchReleaseDate = async (movieId: number) => {
         );
         return koreanRelease?.release_dates[0].release_date || null;
     } catch (error) {
+        //catch 블록에서 오류를 console.error로만 출력하고, null을 반환
+        //이 방식은 호출한 쪽에서 실제로 발생한 오류를 인지하지 못할 수 있음
         console.error('Error fetching release date:', error);
-        return null;
+        // return null;
+        throw error; // 오류를 다시 던져 호출한 곳에서 처리할 수 있게 함
     }
 };
