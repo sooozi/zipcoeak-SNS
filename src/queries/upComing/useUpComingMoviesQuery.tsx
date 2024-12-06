@@ -7,9 +7,8 @@ const fetchUpComingMovies = () => {
         .then(res => res.data); // 'res.data'를 반환하여 data를 바로 사용할 수 있게
 };
 
-export const useUpComingMoviesQuery = () => {
-    return useQuery({
+export const useUpComingMoviesQuery = () =>
+    useQuery({
         queryKey: ['movie-upcoming'],
         queryFn: fetchUpComingMovies,
     });
-};
