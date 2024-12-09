@@ -15,6 +15,7 @@ interface Movie {
 //     release_dates: { release_date: string }[];
 // }
 
+//제네릭 함수 타입을 정의하는 코드
 type Fn<Props> = (props: Props) => React.ReactNode;
 
 // const MovieCard = ({ movie }: { movie: Movie }) => {

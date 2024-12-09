@@ -7,6 +7,7 @@ const typescriptParser = require('@typescript-eslint/parser');
 module.exports = [
     {
         files: ['*.js', '*.ts', '*.tsx'],
+        ignores: ['dist/**'], // dist 폴더 제외
         languageOptions: {
             parser: typescriptParser,
             parserOptions: {
@@ -43,6 +44,6 @@ module.exports = [
                 version: '18',
             },
         },
-        ignorePatterns: ['dist/**'], // dist 폴더 제외
+        // ignorePatterns: ['dist/**'], // dist 폴더 제외
     },
 ];
