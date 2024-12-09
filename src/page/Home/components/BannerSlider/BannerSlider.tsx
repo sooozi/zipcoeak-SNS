@@ -19,27 +19,29 @@ interface Banner {
 
 const BannerSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const movieUrl = process.env.REACT_APP_TMDB_POSTER_URL;
 
     // usePopularMoviesQuery 훅을 사용하여 인기 영화 데이터 가져오기
-    const { data, isLoading, isError, error } = usePopularMoviesQuery();
+    const { data } = usePopularMoviesQuery();
 
-    // 로딩 중이거나 에러 발생 시 대체 UI 표시
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
-
-    const movies = data?.data?.results || []; // 영화 목록
+    const movies = data?.results || []; // 영화 목록
 
     // BannerData 구조로 매핑, poster_path가 없으면 기본 이미지로 대체
-    const bannerData: Banner[] = movies?.map((movie: Movie) => {
-        return {
+    const bannerData: Banner[] =
+        movies?.map((movie: Movie) => ({
             id: movie.id,
             title: movie.title,
             overview: movie.overview,
             imageUrl: movie.poster_path
-                ? `https://media.themoviedb.org/t/p/w533_and_h300_bestv2${movie.poster_path}`
-                : 'https://via.placeholder.com/533x300?text=No+Image', // 포스터가 없으면 대체 이미지 사용
-        };
-    });
+                ? // ? `https://media.themoviedb.org/t/p/w533_and_h300_bestv2${movie.poster_path}`
+                  `${movieUrl}/w533_and_h300_bestv2${movie.poster_path}`
+                : 'https://via.placeholder.com/500x750.png?text=No+Image', // 포스터가 없으면 대체 이미지 사용
+        })) || [];
+
+    // 배너 데이터가 없다면 처리할 수 있는 조건 추가
+    if (bannerData.length === 0) {
+        return <div>배너를 로드할 수 없습니다.</div>;
+    }
 
     const goToNextSlide = () => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % bannerData.length); // 다음 슬라이드로 이동
@@ -55,7 +57,10 @@ const BannerSlider = () => {
     const currentBanner = bannerData[currentIndex];
 
     return (
-        <div className="relative w-full h-screen overflow-hidden">
+        <div
+            className="relative w-full overflow-hidden"
+            style={{ height: 'calc(100vh - 4rem)' }}
+        >
             {/* 배경 흐림 효과 */}
             <div className="absolute inset-0 bg-black opacity-50 backdrop-blur-sm z-20"></div>
 
@@ -84,11 +89,11 @@ const BannerSlider = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
             >
-                <div className="text-white text-center px-5 md:px-10 max-w-[1024px]">
+                <div className="text-white text-center px-5 md:px-10 max-w-[1024px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">
                         {currentBanner.title}
                     </h2>
-                    <p className="text-lg mb-4 mx-8 md:mx-20 line-clamp-3">
+                    <p className="text-lg mx-8 md:mx-20 line-clamp-3">
                         {currentBanner.overview}
                     </p>
                 </div>
@@ -97,13 +102,13 @@ const BannerSlider = () => {
             {/* 이전, 다음 버튼 */}
             <button
                 onClick={goToPreviousSlide}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full opacity-50 hover:opacity-100 z-40"
+                className="absolute left-4 top-1/2 -translate-y-1/2 transform bg-white p-2 rounded-full opacity-50 hover:opacity-100 z-40"
             >
                 <ChevronLeft size={22} color="black" />
             </button>
             <button
                 onClick={goToNextSlide}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full opacity-50 hover:opacity-100 z-40"
+                className="absolute right-4 top-1/2 -translate-y-1/2 transform bg-white p-2 rounded-full opacity-50 hover:opacity-100 z-40"
             >
                 <ChevronRight size={22} color="black" />
             </button>

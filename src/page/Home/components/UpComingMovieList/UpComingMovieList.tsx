@@ -18,18 +18,10 @@ interface UpComingMovieListProps {
 }
 
 const UpComingMovieList: React.FC<UpComingMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = useUpComingMoviesQuery();
-
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
+    const { data } = useUpComingMoviesQuery();
 
     // 응답 데이터가 MoviesResponse 타입임을 명시
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">
