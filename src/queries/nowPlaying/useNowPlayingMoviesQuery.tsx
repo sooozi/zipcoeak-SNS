@@ -10,8 +10,8 @@ const fetchNowPlayingMovies = () =>
 
 // useQuery를 사용하여 API 요청을 처리하는 커스텀 훅입니다.
 // 이 훅은 데이터를 요청하고, 로딩 상태, 오류 상태 등을 관리합니다.
-export const useNowPlayingMoviesQuery = () => {
-    return useQuery({
+export const useNowPlayingMoviesQuery = () =>
+    useQuery({
         // queryKey는 쿼리를 고유하게 식별할 수 있는 키입니다.
         // 같은 queryKey를 가진 쿼리는 React Query에서 동일한 데이터를 재사용하고, 캐시합니다.
         queryKey: ['movie-now-playing'],
@@ -20,4 +20,3 @@ export const useNowPlayingMoviesQuery = () => {
         // 이 함수는 API 호출을 처리하고, 그 결과를 React Query에서 사용할 수 있도록 반환합니다.
         queryFn: fetchNowPlayingMovies,
     });
-};

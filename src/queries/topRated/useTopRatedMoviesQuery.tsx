@@ -7,9 +7,8 @@ const fetchTopRatedMovies = () =>
         .get(`/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}`)
         .then(res => res.data); // 'res.data'를 반환하여 data를 바로 사용할 수 있게
 
-export const useTopRatedMoviesQuery = () => {
-    return useQuery({
+export const useTopRatedMoviesQuery = () =>
+    useQuery({
         queryKey: ['movie-top_rated'],
         queryFn: fetchTopRatedMovies,
     });
-};
