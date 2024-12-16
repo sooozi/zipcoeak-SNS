@@ -11,11 +11,7 @@
         "jsx": "react-jsx",
         "moduleResolution": "node",
         "resolveJsonModule": true,
-        "types": ["vite/client", "node"], // node 타입을 추가합니다.
-        "baseUrl": "./src", // baseUrl을 src로 설정
-        "paths": {
-            "@/*": ["*"] // @를 src 폴더로 매핑
-        }
+        "types": ["vite/client", "node"] // node 타입을 추가합니다.
     },
     "include": ["src/**/*"],
     "exclude": ["dist"]
