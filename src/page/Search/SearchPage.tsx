@@ -1,62 +1,26 @@
-import { useSearchMoviesQuery } from '@/queries/search/useSearchMoviesQuery';
+import {
+    Movie,
+    useSearchMoviesQuery,
+} from '@/queries/search/useSearchMoviesQuery';
 import { Search } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-
-interface Movie {
-    id: number;
-    title: string;
-    imageUrl: string;
-    year: number;
-    rating: number;
-    releaseDate: string | null;
-}
+import { useState } from 'react';
 
 export default function SearchPage() {
     const [inputValue, setInputValue] = useState('');
     const [keyword, setKeyword] = useState('');
-    const [moviesWithReleaseDates, setMoviesWithReleaseDates] = useState<
-        Movie[]
-    >([]);
-    const navigate = useNavigate();
 
+    // 입력값 변경 시 inputValue 상태 업데이트
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
     };
 
+    // 검색 버튼 클릭 시 호출되어 입력값을 keyword로 설정
     const searchByKeyword = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setKeyword(inputValue); // 여기서 keyword 업데이트
-        // navigate(`/movies?q=${keyword}`);
-        // setKeyword('');
+        setKeyword(inputValue);
     };
 
-    // TMDb API에서 검색된 영화 리스트 가져오기
-    const { data: movies } = useSearchMoviesQuery(keyword);
-
-    useEffect(() => {
-        // 검색된 영화마다 개별적으로 개봉일을 가져옴
-        const getMoviesWithReleaseDates = async () => {
-            if (movies) {
-                const updatedMovies = await Promise.all(
-                    movies.map(async (movie: any) => {
-                        // 개별 영화의 개봉일을 가져옴
-                        return {
-                            id: movie.id,
-                            title: movie.title,
-                            imageUrl: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-                            year: movie.release_date
-                                ? movie.release_date.split('-')[0]
-                                : 'N/A',
-                            rating: movie.vote_average || 'N/A',
-                        };
-                    }),
-                );
-                setMoviesWithReleaseDates(updatedMovies); // 상태 업데이트
-            }
-        };
-        getMoviesWithReleaseDates();
-    }, [movies]); // movies가 변경될 때마다 개봉일을 가져옴
+    const { data: movies, isFetching } = useSearchMoviesQuery(keyword);
 
     return (
         <div className="max-w-7xl mx-auto p-8 mt-16 min-h-screen">
@@ -84,16 +48,18 @@ export default function SearchPage() {
                 </button>
             </form>
 
+            {isFetching && (
+                <p className="text-center text-gray-500 mt-8">로딩 중...</p>
+            )}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {/* 검색된 영화가 없을 때 */}
-                {!movies?.length && keyword && (
+                {!movies?.length && keyword && !isFetching && (
                     <p className="text-center text-gray-500 mt-8">
                         검색 결과가 없습니다.
                     </p>
                 )}
 
-                {/* 검색된 영화 목록 표시 */}
-                {moviesWithReleaseDates.map((movie: Movie) => (
+                {movies?.map((movie: Movie) => (
                     <div
                         key={movie.id}
                         className="bg-white rounded-lg overflow-hidden shadow-lg"
