@@ -1,3 +1,4 @@
+import useLocalStorage from '@/hooks/useLocalStorage';
 import {
     Calendar,
     LogIn,
@@ -6,20 +7,17 @@ import {
     TrendingUp,
     Trophy,
 } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Header: React.FC = () => {
+const Header = () => {
     const [scrolled, setScrolled] = useState(false);
-    const [nickname, setNickname] = useState<string | null>(null);
+    const [nickname, setNickname] = useLocalStorage<string | null>(
+        'nickname',
+        null,
+    );
 
-    // 페이지 로드 시 로컬 스토리지에서 닉네임을 가져와서 상태 업데이트
     useEffect(() => {
-        const storedNickname = localStorage.getItem('nickname');
-        if (storedNickname) {
-            setNickname(storedNickname);
-        }
-
         // 스크롤 이벤트 처리
         const handleScroll = () => {
             if (window.scrollY > 50) {
@@ -29,19 +27,12 @@ const Header: React.FC = () => {
             }
         };
 
+        // scroll 이벤트 리스너 추가
         window.addEventListener('scroll', handleScroll);
 
-        // 로컬 스토리지에서 닉네임 변경 사항을 감지하여 상태 업데이트
-        const handleStorageChange = () => {
-            const updatedNickname = localStorage.getItem('nickname');
-            setNickname(updatedNickname);
-        };
-
-        window.addEventListener('storage', handleStorageChange);
-
+        // 정리 작업: 컴포넌트 언마운트 시 이벤트 리스너를 제거
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('storage', handleStorageChange); // 이벤트 리스너 정리
         };
     }, []); // 컴포넌트가 마운트될 때만 실행
 

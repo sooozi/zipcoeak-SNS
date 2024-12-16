@@ -1,3 +1,4 @@
+import aspectRatio from '@tailwindcss/aspect-ratio';
 import lineClamp from '@tailwindcss/line-clamp';
 
 export default {
@@ -7,5 +8,8 @@ export default {
     theme: {
         extend: {},
     },
-    plugins: [lineClamp], // 플러그인 추가
+    plugins: [
+        lineClamp, // 기존 플러그인
+        aspectRatio, // 새로 추가된 aspect-ratio 플러그인
+    ],
 };

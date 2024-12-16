@@ -1,6 +1,6 @@
+import MovieCard from '@/common/MovieCard/MovieCard';
+import { useUpComingMoviesQuery } from '@/queries/upComing/useUpComingMoviesQuery';
 import React from 'react';
-import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useUpComingMoviesQuery } from '../../../../hooks/useUpComingMovie';
 
 interface Movie {
     id: number;
@@ -16,17 +16,9 @@ interface UpcomingMovieListProps {
 }
 
 const TrendingMovieList: React.FC<UpcomingMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = useUpComingMoviesQuery();
+    const { data } = useUpComingMoviesQuery();
 
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
-
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">
@@ -43,7 +35,7 @@ const TrendingMovieList: React.FC<UpcomingMovieListProps> = ({ title }) => {
             <div className="relative">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 pb-4 place-items-center">
                     {movies.length > 0 ? (
-                        movies.map((movie: Movie) => {
+                        movies?.map((movie: Movie) => {
                             const mappedMovie = {
                                 id: movie.id,
                                 title: movie.title,

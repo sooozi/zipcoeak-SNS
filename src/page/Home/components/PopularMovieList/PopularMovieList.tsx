@@ -1,8 +1,8 @@
+import MovieCard from '@/common/MovieCard/MovieCard';
+import { usePopularMoviesQuery } from '@/queries/popular/usePopularMoviesQuery';
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovie';
 
 interface Movie {
     id: number;
@@ -18,17 +18,9 @@ interface PopularMovieListProps {
 }
 
 const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = usePopularMoviesQuery();
+    const { data } = usePopularMoviesQuery();
 
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
-
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">
@@ -43,7 +35,7 @@ const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
             <div className="relative">
                 <div className="flex space-x-4 overflow-x-auto pb-4 custom-scrollbar">
                     {movies.length > 0 ? (
-                        movies.map((movie: Movie) => {
+                        movies?.map((movie: Movie) => {
                             // API 응답에서 필요한 데이터만 추출해서 MovieCard에 전달
                             const mappedMovie = {
                                 id: movie.id,

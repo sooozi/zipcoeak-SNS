@@ -1,6 +1,6 @@
+import MovieCard from '@/common/MovieCard/MovieCard';
+import { useTopRatedMoviesQuery } from '@/queries/topRated/useTopRatedMoviesQuery';
 import React from 'react';
-import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useTopRatedMoviesQuery } from '../../../../hooks/useTopRatedMovie';
 
 interface Movie {
     id: number;
@@ -16,17 +16,9 @@ interface TopRatedMovieListProps {
 }
 
 const TopRatedMovieList: React.FC<TopRatedMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = useTopRatedMoviesQuery();
+    const { data } = useTopRatedMoviesQuery();
 
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
-
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">
@@ -44,7 +36,7 @@ const TopRatedMovieList: React.FC<TopRatedMovieListProps> = ({ title }) => {
             <div className="relative">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 pb-4 place-items-center">
                     {movies.length > 0 ? (
-                        movies.map((movie: Movie) => {
+                        movies?.map((movie: Movie) => {
                             const mappedMovie = {
                                 id: movie.id,
                                 title: movie.title,

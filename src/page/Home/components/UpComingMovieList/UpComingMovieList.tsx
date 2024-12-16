@@ -1,8 +1,8 @@
+import MovieCard from '@/common/MovieCard/MovieCard';
+import { useUpComingMoviesQuery } from '@/queries/upComing/useUpComingMoviesQuery';
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { useUpComingMoviesQuery } from '../../../../hooks/useUpComingMovie';
 
 interface Movie {
     id: number;
@@ -18,18 +18,10 @@ interface UpComingMovieListProps {
 }
 
 const UpComingMovieList: React.FC<UpComingMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = useUpComingMoviesQuery();
-
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
+    const { data } = useUpComingMoviesQuery();
 
     // 응답 데이터가 MoviesResponse 타입임을 명시
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">
@@ -44,7 +36,7 @@ const UpComingMovieList: React.FC<UpComingMovieListProps> = ({ title }) => {
             <div className="relative">
                 <div className="flex space-x-4 overflow-x-auto pb-4 custom-scrollbar">
                     {movies.length > 0 ? (
-                        movies.map((movie: Movie) => {
+                        movies?.map((movie: Movie) => {
                             // API 응답에서 필요한 데이터만 추출해서 MovieCard에 전달
                             const mappedMovie = {
                                 id: movie.id,

@@ -1,6 +1,7 @@
+import InfiniteSldier from '@/common/InfiniteSldier/InfiniteSldier';
+import MovieCard from '@/common/MovieCard/MovieCard';
+import { usePopularMoviesQuery } from '@/queries/popular/usePopularMoviesQuery';
 import React from 'react';
-import MovieCard from '../../../../common/MovieCard/MovieCard';
-import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovie';
 
 interface Movie {
     id: number;
@@ -16,17 +17,9 @@ interface PopularMovieListProps {
 }
 
 const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
-    const {
-        data: response,
-        isLoading,
-        isError,
-        error,
-    } = usePopularMoviesQuery();
+    const { data } = usePopularMoviesQuery();
 
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error: {error.message}</p>;
-
-    const movies = response?.data?.results || [];
+    const movies = data?.results || [];
 
     return (
         <div className="space-y-4">
@@ -40,10 +33,19 @@ const PopularMovieList: React.FC<PopularMovieListProps> = ({ title }) => {
                     </p>
                 </div>
             </div>
+            {/* 무한 슬라이더 */}
+            <div className="pb-20">
+                {movies.length > 0 ? (
+                    <InfiniteSldier movie={movies} />
+                ) : (
+                    <p>No movies available</p>
+                )}
+            </div>
+            {/* 카드 */}
             <div className="relative">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 pb-4 place-items-center">
                     {movies.length > 0 ? (
-                        movies.map((movie: Movie) => {
+                        movies?.map((movie: Movie) => {
                             const mappedMovie = {
                                 id: movie.id,
                                 title: movie.title,
