@@ -11,6 +11,8 @@ interface Movie {
 }
 
 type Fn<Props> = (props: Props) => React.ReactNode;
+//React.ReactNode: React에서 화면에 그릴 수 있는 모든 것을 대표하는 타입
+//=> Fn<Props> 타입에서 함수가 반환하는 값이 React에서 렌더링할 수 있는 형태라는 것을 명시하기 위해 React.ReactNode로 타입 지정
 
 const InfiniteSlider: Fn<{ movie: Movie[] }> = ({ movie }) => {
     const moviesPerPage = 5; // 한 페이지에 보여줄 영화 수
@@ -20,15 +22,14 @@ const InfiniteSlider: Fn<{ movie: Movie[] }> = ({ movie }) => {
 
     // 전체 슬라이드 페이지 수 계산 (올림)
     const totalPages = Math.ceil(movie.length / moviesPerPage);
-    // const totalPages = movie.length;
 
-    // 현재 페이지 계산
+    // 현재 페이지 계산 (현재 슬라이드에서 보여준 총 영화 수 / 한 페이지에 보여줄 영화 수)
     const currentPage = Math.floor(currentIndex / moviesPerPage);
 
     // 슬라이드에 맞게 표시할 영화들만 가져옴
     const visibleMovies = movie.slice(
-        currentIndex,
-        currentIndex + totalMoviesPerSlide,
+        currentIndex, //현재까지 보여준 영화 수
+        currentIndex + totalMoviesPerSlide, //현재 슬라이드에서 표시할 마지막 영화의 인덱스
     );
 
     const goToPreviousSlide = () => {
