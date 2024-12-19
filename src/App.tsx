@@ -1,5 +1,6 @@
 // App.tsx
 import AppLayout from '@/layout/AppLayout';
+import GenrePage from '@/page/Genre/GenrePage';
 import Home from '@/page/Home/Home';
 import LoginPage from '@/page/Login/Login';
 import MovieDetailPage from '@/page/MovieDetail/MovieDetail';
@@ -26,6 +27,10 @@ const App = () => {
                 />
                 <Route path="topRatedList" element={<MovieTopRatedPage />} />
                 <Route path="upcomingList" element={<MovieUpcomingPage />} />
+
+                {/* 장르별 영화 목록을 처리하는 페이지 */}
+                <Route path="movies" element={<GenrePage />} />
+                <Route path="/genre/:genreId" element={<GenrePage />} />
 
                 <Route path="login" element={<LoginPage />} />
                 <Route path="search" element={<SearchPage />} />

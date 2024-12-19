@@ -1,3 +1,4 @@
+import GenreButtons from '@/common/Genre/GenreButtons';
 import { useSearchMoviesQuery } from '@/queries/search/useSearchMoviesQuery';
 import { Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -13,12 +14,13 @@ interface Movie {
 }
 
 export default function SearchPage() {
+    const navigate = useNavigate();
     const [inputValue, setInputValue] = useState('');
     const [keyword, setKeyword] = useState('');
+    const [genreId, setGenreId] = useState<number | null>(null);
     const [moviesWithReleaseDates, setMoviesWithReleaseDates] = useState<
         Movie[]
     >([]);
-    const navigate = useNavigate();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -27,7 +29,6 @@ export default function SearchPage() {
     const searchByKeyword = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setKeyword(inputValue); // 여기서 keyword 업데이트
-        // navigate(`/movies?q=${keyword}`);
         // setKeyword('');
     };
 
@@ -58,12 +59,21 @@ export default function SearchPage() {
         getMoviesWithReleaseDates();
     }, [movies]); // movies가 변경될 때마다 개봉일을 가져옴
 
+    // 장르 선택 시 호출 함수
+    const handleGenreSelect = (genreId: number) => {
+        console.log('Selected Genre ID:', genreId);
+        navigate(`/movies?g=${genreId}`);
+        // navigate(`/movies/genre/${genreId}`);
+        setGenreId(genreId); // 장르 선택
+    };
+
     return (
         <div className="max-w-7xl mx-auto p-8 mt-16 min-h-screen">
             <h2 className="text-5xl font-bold text-white text-center tracking-wide animate-slide-up py-20">
                 Movie Search
             </h2>
 
+            {/* 검색창 */}
             <form
                 className="flex gap-3 mx-auto mb-20 max-w-[500px]"
                 onSubmit={searchByKeyword}
@@ -84,6 +94,10 @@ export default function SearchPage() {
                 </button>
             </form>
 
+            {/* 장르 별 검색 */}
+            <GenreButtons onGenreSelect={handleGenreSelect} />
+
+            {/* 검색 결과 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {/* 검색된 영화가 없을 때 */}
                 {!movies?.length && keyword && (
