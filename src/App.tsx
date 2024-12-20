@@ -29,8 +29,7 @@ const App = () => {
                 <Route path="upcomingList" element={<MovieUpcomingPage />} />
 
                 {/* 장르별 영화 목록을 처리하는 페이지 */}
-                <Route path="movies" element={<GenrePage />} />
-                <Route path="/genre/:genreId" element={<GenrePage />} />
+                <Route path="genre/:genreId" element={<GenrePage />} />
 
                 <Route path="login" element={<LoginPage />} />
                 <Route path="search" element={<SearchPage />} />

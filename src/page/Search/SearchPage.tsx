@@ -29,7 +29,7 @@ export default function SearchPage() {
     const searchByKeyword = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setKeyword(inputValue); // 여기서 keyword 업데이트
-        // setKeyword('');
+        setKeyword('');
     };
 
     // TMDb API에서 검색된 영화 리스트 가져오기
@@ -62,8 +62,7 @@ export default function SearchPage() {
     // 장르 선택 시 호출 함수
     const handleGenreSelect = (genreId: number) => {
         console.log('Selected Genre ID:', genreId);
-        navigate(`/movies?g=${genreId}`);
-        // navigate(`/movies/genre/${genreId}`);
+        navigate(`/genre/${genreId}`);
         setGenreId(genreId); // 장르 선택
     };
 

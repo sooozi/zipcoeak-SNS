@@ -10,6 +10,9 @@ interface GenresResponse {
     genres: Genre[];
 }
 
+//return이 없는 이유
+//fetchAllMovieGenre 함수에서 api.get()을 사용하여 API 요청을 보내고 그 반환값을 그대로 반환하기 때문
+//return 없이 api.get()에서 반환된 값을 then()에서 직접 반환하는 방식
 const fetchAllMovieGenre = (): Promise<GenresResponse> =>
     api
         .get(`genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`)
