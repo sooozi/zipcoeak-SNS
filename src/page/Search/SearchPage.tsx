@@ -1,6 +1,4 @@
-
 import GenreButtons from '@/common/Genre/GenreButtons';
-import { useSearchMoviesQuery } from '@/queries/search/useSearchMoviesQuery';
 import {
     Movie,
     useSearchMoviesQuery,
@@ -8,6 +6,7 @@ import {
 
 import { Search } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 export default function SearchPage() {
     const navigate = useNavigate();
@@ -18,7 +17,6 @@ export default function SearchPage() {
     const [moviesWithReleaseDates, setMoviesWithReleaseDates] = useState<
         Movie[]
     >([]);
-
 
     // 입력값 변경 시 inputValue 상태 업데이트
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +66,6 @@ export default function SearchPage() {
                     검색
                 </button>
             </form>
-
 
             {/* 장르 별 검색 */}
             <GenreButtons onGenreSelect={handleGenreSelect} />
