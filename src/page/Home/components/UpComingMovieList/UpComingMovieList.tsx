@@ -1,3 +1,4 @@
+import Carousel from '@/common/Carousel/Carousel';
 import MovieCard from '@/common/MovieCard/MovieCard';
 import { useUpComingMoviesQuery } from '@/queries/upComing/useUpComingMoviesQuery';
 import { ChevronRight } from 'lucide-react';
@@ -32,6 +33,9 @@ const UpComingMovieList: React.FC<UpComingMovieListProps> = ({ title }) => {
                 <Link to="/movies">
                     <ChevronRight className="h-4 w-4" />
                 </Link>
+            </div>
+            <div>
+                <Carousel movies={movies} />
             </div>
             <div className="relative">
                 <div className="flex space-x-4 overflow-x-auto pb-4 custom-scrollbar">

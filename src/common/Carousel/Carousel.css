@@ -1,0 +1,35 @@
+/* 무한 슬라이드 애니메이션 */
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+.carousel-container {
+    display: flex;
+    animation: slide 30s linear infinite;
+}
+
+/* 영화 항목 */
+.movie-content {
+    width: calc(10% - 1rem);
+}
+.movie-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.movie-content .title {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.5rem;
+}
+.carousel-container:hover {
+    animation-play-state: paused;
+}
