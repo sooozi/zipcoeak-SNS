@@ -10,15 +10,9 @@ interface Movie {
     year: number;
 }
 
-// interface ReleaseDatesResponse {
-//     iso_3166_1: string; //국가: 한국
-//     release_dates: { release_date: string }[];
-// }
-
 //제네릭 함수 타입을 정의하는 코드
 type Fn<Props> = (props: Props) => React.ReactNode;
 
-// const MovieCard = ({ movie }: { movie: Movie }) => {
 const MovieCard: Fn<{ movie: Movie }> = ({ movie }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [releaseDate, setReleaseDate] = useState<string | null>(null); // 개봉일 상태
