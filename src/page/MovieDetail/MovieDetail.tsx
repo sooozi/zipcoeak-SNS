@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 
 const MovieDetail = () => {
     const { id } = useParams<{ id: string }>(); // URL에서 영화 ID 추출
+    const languageEnUS = 'en-US';
+    const languageKoKR = 'ko-KR';
 
     //이전코드
     // const { data: movieData, isLoading: isLoadingMovieData } =
@@ -15,8 +17,12 @@ const MovieDetail = () => {
     // suspense: true 옵션 추가 => 로딩 코드 해결
     // suspense: true 옵션을 쿼리 훅에 넣어주면,
     // React Query가 Suspense 컴포넌트와 함께 사용할 수 있도록 로딩 상태를 자동으로 처리
-    const movieDataQuery = useMovieDetailQuery(id || '', { suspense: true });
-    const movieReviewsQuery = useMovieReviewQuery(id || '', { suspense: true });
+    const movieDataQuery = useMovieDetailQuery(id || '', languageKoKR, {
+        suspense: true,
+    });
+    const movieReviewsQuery = useMovieReviewQuery(id || '', languageEnUS, {
+        suspense: true,
+    });
 
     const { data: movieData } = movieDataQuery;
     const { data: movieReviews } = movieReviewsQuery;
