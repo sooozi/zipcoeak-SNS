@@ -1,13 +1,24 @@
+
+import GenreButtons from '@/common/Genre/GenreButtons';
+import { useSearchMoviesQuery } from '@/queries/search/useSearchMoviesQuery';
 import {
     Movie,
     useSearchMoviesQuery,
 } from '@/queries/search/useSearchMoviesQuery';
+
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 
 export default function SearchPage() {
+    const navigate = useNavigate();
     const [inputValue, setInputValue] = useState('');
     const [keyword, setKeyword] = useState('');
+
+    const [genreId, setGenreId] = useState<number | null>(null);
+    const [moviesWithReleaseDates, setMoviesWithReleaseDates] = useState<
+        Movie[]
+    >([]);
+
 
     // 입력값 변경 시 inputValue 상태 업데이트
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,10 +28,19 @@ export default function SearchPage() {
     // 검색 버튼 클릭 시 호출되어 입력값을 keyword로 설정
     const searchByKeyword = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setKeyword(inputValue); // 여기서 keyword 업데이트
+        setKeyword('');
         setKeyword(inputValue);
     };
 
     const { data: movies, isFetching } = useSearchMoviesQuery(keyword);
+
+    // 장르 선택 시 호출 함수
+    const handleGenreSelect = (genreId: number) => {
+        console.log('Selected Genre ID:', genreId);
+        navigate(`/genre/${genreId}`);
+        setGenreId(genreId); // 장르 선택
+    };
 
     return (
         <div className="max-w-7xl mx-auto p-8 mt-16 min-h-screen">
@@ -28,6 +48,7 @@ export default function SearchPage() {
                 Movie Search
             </h2>
 
+            {/* 검색창 */}
             <form
                 className="flex gap-3 mx-auto mb-20 max-w-[500px]"
                 onSubmit={searchByKeyword}
@@ -48,6 +69,11 @@ export default function SearchPage() {
                 </button>
             </form>
 
+
+            {/* 장르 별 검색 */}
+            <GenreButtons onGenreSelect={handleGenreSelect} />
+
+            {/* 검색 결과 */}
             {isFetching && (
                 <p className="text-center text-gray-500 mt-8">로딩 중...</p>
             )}
