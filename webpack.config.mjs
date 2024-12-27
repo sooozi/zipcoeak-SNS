@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'; // 번들 분석 플러그인 추가
 
 // .env 파일 로드
 dotenv.config();
@@ -57,6 +58,10 @@ const config = {
             'process.env.REACT_APP_TMDB_POSTER_URL': JSON.stringify(
                 process.env.REACT_APP_TMDB_POSTER_URL,
             ),
+        }),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static', // HTML 파일로 분석 결과 저장
+            openAnalyzer: true, // 빌드 후 브라우저로 자동 열기
         }),
     ],
     module: {
