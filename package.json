@@ -8,7 +8,7 @@
         "test": "echo \"No tests specified\"",
         "start": "webpack serve --mode development",
         "type-check": "tsc --noEmit",
-        "build": "npm run type-check && babel src --out-dir dist --extensions \".js,.ts\"",
+        "build": "npm run type-check && webpack --mode production",
         "prepare": "husky install",
         "dev": "webpack serve --mode development --open"
     },
@@ -75,9 +75,10 @@
         "ts-loader": "^9.5.1",
         "typescript": "^5.6.3",
         "typescript-eslint": "^8.10.0",
-        "webpack": "^5.96.1",
+        "webpack": "^5.97.1",
+        "webpack-bundle-analyzer": "^4.10.2",
         "webpack-cli": "^5.1.4",
-        "webpack-dev-server": "^5.1.0"
+        "webpack-dev-server": "^5.2.0"
     },
     "lint-staged": {
         "*.{js,ts}": "eslint --fix --ignore-pattern 'dist/**'"
