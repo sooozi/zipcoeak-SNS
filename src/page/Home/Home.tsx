@@ -1,9 +1,22 @@
 import ErrorBoundary from '@/common/ErrorBoundary';
-import { Suspense } from 'react';
-import BannerSlider from '../Home/components/BannerSlider/BannerSlider';
-import PopularMovieList from '../Home/components/PopularMovieList/PopularMovieList';
-import TopRatedMovieList from '../Home/components/TopRatedMovieList/TopRatedMovieList';
-import UpComingMovieList from '../Home/components/UpComingMovieList/UpComingMovieList';
+import React, { Suspense } from 'react';
+// import BannerSlider from '../Home/components/BannerSlider/BannerSlider';
+// import PopularMovieList from '../Home/components/PopularMovieList/PopularMovieList';
+// import TopRatedMovieList from '../Home/components/TopRatedMovieList/TopRatedMovieList';
+// import UpComingMovieList from '../Home/components/UpComingMovieList/UpComingMovieList';
+// React.lazy로 동적 import 처리
+const BannerSlider = React.lazy(
+    () => import('../Home/components/BannerSlider/BannerSlider'),
+);
+const PopularMovieList = React.lazy(
+    () => import('../Home/components/PopularMovieList/PopularMovieList'),
+);
+const TopRatedMovieList = React.lazy(
+    () => import('../Home/components/TopRatedMovieList/TopRatedMovieList'),
+);
+const UpComingMovieList = React.lazy(
+    () => import('../Home/components/UpComingMovieList/UpComingMovieList'),
+);
 
 export default function Home() {
     return (
