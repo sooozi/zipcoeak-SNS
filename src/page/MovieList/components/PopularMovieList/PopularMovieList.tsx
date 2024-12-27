@@ -1,7 +1,11 @@
-import InfiniteSldier from '@/common/InfiniteSldier/InfiniteSldier';
-import MovieCard from '@/common/MovieCard/MovieCard';
+// import InfiniteSldier from '@/common/InfiniteSldier/InfiniteSldier';
+// import MovieCard from '@/common/MovieCard/MovieCard';
 import { usePopularMoviesQuery } from '@/queries/popular/usePopularMoviesQuery';
 import React from 'react';
+const MovieCard = React.lazy(() => import('@/common/MovieCard/MovieCard'));
+const InfiniteSldier = React.lazy(
+    () => import('@/common/InfiniteSldier/InfiniteSldier'),
+);
 
 interface Movie {
     id: number;
