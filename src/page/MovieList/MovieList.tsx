@@ -1,5 +1,8 @@
 import React from 'react';
-import PopularMovieList from './components/PopularMovieList/PopularMovieList';
+// import PopularMovieList from './components/PopularMovieList/PopularMovieList';
+const PopularMovieList = React.lazy(
+    () => import('./components/PopularMovieList/PopularMovieList'),
+);
 
 const MovieListPage: React.FC = () => {
     return (
